@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public User getUserByColumn(String column, String credentials) {
+    public User getUserByColumn(final String column, final String credentials) {
 
         Query<User> query = sessionFactory.getCurrentSession()
                 .createQuery("from User WHERE " + column + "=?1")
