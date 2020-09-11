@@ -1,1 +1,1 @@
-"# Boutique_Spring" 
+Boutique project using Spring and Hibernate frameworks
