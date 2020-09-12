@@ -5,10 +5,12 @@ import com.boiechko.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserDaoImpl implements UserDao {
 
     private final SessionFactory sessionFactory;
