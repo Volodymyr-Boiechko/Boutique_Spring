@@ -1,0 +1,73 @@
+@import "components/buttons";
+
+.form {
+
+  padding: 20px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+
+  label b {
+    color: #797878;
+  }
+
+  #remember {
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  #checked {
+    margin-left: 10px;
+    margin-right: 15px;
+  }
+
+  &__input {
+
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-weight: 400;
+
+  }
+
+  &__under {
+
+    margin-top: 7px;
+    display: inline-block;
+  }
+
+  &_link {
+
+    text-decoration: none;
+    color: #3e77aa;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+      text-decoration: underline;
+      color: #f44336;
+    }
+
+    &_forget {
+      margin-left: 40%;
+    }
+
+    &_reg {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: 500;
+    }
+  }
+}
+
+.title {
+
+  font-size: 18px;
+  text-align: center;
+  font-weight: 700;
+
+}

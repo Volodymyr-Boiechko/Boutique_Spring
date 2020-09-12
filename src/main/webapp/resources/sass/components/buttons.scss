@@ -1,0 +1,53 @@
+.button {
+
+  height: 55px;
+  padding: 0 20px;
+  border: 2px solid #000;
+  text-transform: uppercase;
+  background-color: #fff;
+  transition: .5s all;
+
+  &:hover {
+    background-color: #dcdcdc;
+  }
+  &_login {
+    display: block;
+    margin: 20px auto 0;
+    width: 40%;
+    border-radius: 10px;
+  }
+  &_registration {
+    width: 50%;
+    margin: 35px auto 0;
+  }
+
+  &_forgetPassword {
+    width: 40%;
+    margin: 20px 0 0 0;
+    border-radius: 10px;
+  }
+
+  &_updatePassword {
+    width: 40%;
+    margin: 30px auto 0;
+    border-radius: 10px;
+  }
+
+  &_footer {
+    width: 55%;
+    margin-bottom: 20px;
+  }
+
+  &_orders {
+    display: block;
+    text-align: center;
+    color: black;
+    &:hover {
+      text-decoration: none;
+      color: black;
+    }
+  }
+  &_shoppingBag {
+    margin-top: 15px;
+  }
+}
