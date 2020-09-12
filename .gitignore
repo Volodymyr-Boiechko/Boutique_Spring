@@ -6,6 +6,7 @@ out/
 .settings/
 target/
 src/main/webapp/resources/img
+src/main/resources/htmlFiles
 
 # Compiled class file
 *.class
