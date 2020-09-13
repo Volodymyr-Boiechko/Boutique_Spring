@@ -1,0 +1,164 @@
+.overlay {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.56);
+  z-index: 1000;
+}
+
+.modalw {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 400px;
+  background-color: #f2f2f2;
+  padding: 38px 20px 40px 20px;
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: -40px;
+    font-size: 41px;
+    line-height: 21px;
+    color: black;
+    cursor: pointer;
+
+    &_call {
+      top: 10px;
+      right: 10px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 18px;
+    text-align: center;
+    font-weight: 700;
+    color: #0d0d0d;
+  }
+
+  &__descr {
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+    color: #0d0d0d;
+    margin-top: 10px;
+  }
+
+  &__button {
+    background-color: #2b2b2b;
+    border: none;
+    border-radius: 40px;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #ffffff;
+    display: block;
+    margin: 20px auto 0;
+    height: 60px;
+    width: 200px;
+  }
+
+  &_mini {
+    height: 150px;
+    padding: 47px 20px 40px 20px;
+  }
+  &_registration {
+    padding: 47px 20px 40px 20px;
+    height: 215px;
+  }
+
+  &_call {
+    padding: 20px 20px 20px 20px;
+    width: 400px;
+    height: 450px;
+  }
+  &_addProduct {
+    height: 600px;
+  }
+  &_addToDataBase {
+    height: 450px;
+  }
+}
+
+#call, #thanks, #add {
+  display: none;
+}
+
+.feed-form {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 96%;
+  margin-top: 20px;
+  flex-direction: column;
+  height: 90%;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #AAAAAA;
+    border-radius: 10%;
+
+    &:hover {
+      background-color: #999;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    text-align: center;
+    font-weight: 700;
+    color: #0d0d0d;
+  }
+
+  &__descr {
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+    color: #0d0d0d;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+
+  ul {
+    list-style: none;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+    ul::-webkit-scrollbar {
+      background-color: #f44336;
+    }
+
+    .top {
+      margin-top: 35px;
+    }
+    
+
+    li {
+      height: 55px;
+      margin: 10px 0;
+
+      label {
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+
+        .input {
+          padding: 15px;
+          width: 100%;
+          border-radius: 5px;
+          border: 0.5px solid #f2f2f2;
+          background-color: #ffffff;
+        }
+      }
+    }
+  }
+}

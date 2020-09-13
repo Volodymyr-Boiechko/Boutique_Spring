@@ -1,0 +1,68 @@
+@import "components/buttons";
+@import "components/modal";
+
+.form {
+
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto 0;
+
+  label b {
+    color: #797878;
+  }
+
+  &__label {
+
+    margin-top: 25px;
+    position: relative;
+    height: 50px;
+
+    input {
+      position: absolute;
+      left: 25%;
+      top: -40%;
+      width: 400px;
+      padding: 12px 20px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .long {
+      top: -20%;
+    }
+
+    .birth {
+      width: 200px;
+    }
+  }
+
+  &__under {
+
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+
+    a {
+
+      text-decoration: none;
+      color: #3e77aa;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover {
+        text-decoration: underline;
+        color: #f44336;
+      }
+    }
+  }
+}
+
+.title {
+
+  font-size: 18px;
+  text-align: center;
+  font-weight: 700;
+
+}

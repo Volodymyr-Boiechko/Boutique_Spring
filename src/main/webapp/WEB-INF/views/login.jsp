@@ -18,7 +18,7 @@
 
     <h1 class="title">Вхід</h1>
 
-    <form class="form" action="${pageContext.request.contextPath}/homePage" onsubmit="validate()">
+    <form class="form"  >
 
         <label>
             <b>Логін</b>
@@ -62,9 +62,9 @@
 
 <script>
 
-    function validate() {
+    $("form").submit(function (e) {
 
-        let success = false;
+        e.preventDefault();
 
         $.ajax({
 
@@ -80,12 +80,10 @@
             }
         }).done(function (response) {
 
-            success = true;
             console.log(response.status);
+            window.location.href = "${pageContext.request.contextPath}/homePage";
 
         }).fail(function (response) {
-
-            success = false;
 
             if (response.status === 400) {
                 alert("Активуйте акаунт");
@@ -96,8 +94,9 @@
             }
         });
 
-        return success;
-    }
+    });
+
+
 </script>
 </body>
 </html>
