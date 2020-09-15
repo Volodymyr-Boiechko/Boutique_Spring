@@ -4,6 +4,7 @@ import com.boiechko.model.User;
 import com.boiechko.service.interfaces.UserProfileService;
 import com.boiechko.service.interfaces.UserService;
 import com.boiechko.utils.ConvertDateUtil;
+import com.boiechko.utils.HashingPassword.HashPasswordUtil;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,14 +77,54 @@ public class UserProfileController {
 
         try {
             userService.updateUser(user);
+            logger.info(user.getUsername() + " updated info about himself");
+
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+
         } catch (IllegalArgumentException e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(null);
-
     }
 
+    @GetMapping("/changePassword")
+    public String onChangePassword() {
+        return "Profile/changePassword";
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<Object> changePassword(@RequestParam("currentPassword") final String currentPassword,
+                                                 @RequestParam("newPassword") final String newPassword) {
+
+
+        final ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        final HttpSession session = attributes.getRequest().getSession();
+
+        final User user = (User) session.getAttribute("user");
+
+        boolean isEnteredPasswordEqualCurrentPassword = HashPasswordUtil.checkPassword(currentPassword, user.getPassword());
+
+        if (isEnteredPasswordEqualCurrentPassword) {
+
+            user.setPassword(HashPasswordUtil.hashPassword(newPassword));
+
+            try {
+
+                userService.updateUser(user);
+                logger.info(user.getUsername() + " updated password");
+
+                return ResponseEntity.status(HttpStatus.OK).body(null);
+
+            } catch (IllegalArgumentException e) {
+                logger.error(e.getMessage());
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            }
+
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+
+    }
 
 }
