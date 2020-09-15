@@ -2,10 +2,14 @@ package com.boiechko.controller;
 
 import com.boiechko.model.User;
 import com.boiechko.service.interfaces.UserProfileService;
+import com.boiechko.service.interfaces.UserService;
+import com.boiechko.utils.ConvertDateUtil;
+import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -15,10 +19,14 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/userProfile")
 public class UserProfileController {
 
-    private final UserProfileService userProfileService;
+    private final Logger logger = Logger.getLogger(UserProfileController.class);
 
-    public UserProfileController(UserProfileService userProfileService) {
+    private final UserProfileService userProfileService;
+    private final UserService userService;
+
+    public UserProfileController(UserProfileService userProfileService, UserService userService) {
         this.userProfileService = userProfileService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -42,7 +50,40 @@ public class UserProfileController {
         return "components/navProfile";
     }
 
+    @GetMapping("/userInfo")
+    public String onUserInfo() {
+        return "Profile/userInfo";
+    }
 
+    @PostMapping("/userInfo")
+    @ResponseBody
+    public ResponseEntity<Object> updateUserInfo(@RequestParam("firstName") final String firstName,
+                                                 @RequestParam("surname") final String surname,
+                                                 @RequestParam("birthDate") final String birthDate,
+                                                 @RequestParam("email") final String email,
+                                                 @RequestParam("phoneNumber") final String phoneNumber) {
+
+        final ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        final HttpSession session = attributes.getRequest().getSession();
+
+        final User user = (User) session.getAttribute("user");
+
+        user.setFirstName(firstName);
+        user.setSurname(surname);
+        user.setBirthDate(ConvertDateUtil.convertDate(birthDate));
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+
+        try {
+            userService.updateUser(user);
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(null);
+
+    }
 
 
 }

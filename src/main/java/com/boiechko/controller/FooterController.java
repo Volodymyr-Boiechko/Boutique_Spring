@@ -23,7 +23,7 @@ public class FooterController {
 
         final User user = new User(firstName, surname, email, phoneNumber);
 
-            JavaMailService.sendQuestionFromUserEmail("boiechko.work@gmail.com",
+        JavaMailService.sendQuestionFromUserEmail("boiechko.work@gmail.com",
                 "questionFromUser", user, comment);
 
         logger.info("Question letter has been sent");

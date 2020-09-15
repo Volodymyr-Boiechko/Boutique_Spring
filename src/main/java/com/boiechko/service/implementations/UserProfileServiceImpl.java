@@ -25,7 +25,7 @@ public class UserProfileServiceImpl implements UserProfileService {
             case "orders.jsp": case "orderItem.jsp":
                 numberOfSection = ORDERS.getNumberOfSection();
                 break;
-            case "info.jsp":
+            case "userInfo.jsp":
                 numberOfSection = PERSON_INFO.getNumberOfSection();
                 break;
             case "changePassword.jsp":
