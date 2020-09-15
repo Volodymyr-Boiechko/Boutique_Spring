@@ -20,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final Logger logger = Logger.getLogger(ProductServiceImpl.class);
 
-    private final String PATH_TO_DATABASE_IMAGES = "C:\\Users\\volod\\IdeaProjects\\Boutique_Spring\\src\\main\\webapp\\dataBaseImages";
+    private final String PATH_TO_DATABASE_IMAGES = "C:\\Users\\volod\\IdeaProjects\\Boutique_Spring\\src\\main\\webapp\\resources\\dataBaseImages";
 
     private final ProductDao productDao;
 
