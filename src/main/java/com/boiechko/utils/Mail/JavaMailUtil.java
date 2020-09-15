@@ -43,10 +43,14 @@ public class JavaMailUtil {
 
     private String getSubject() {
 
-        if ("confirmRegistration".equals(emailSubject)) {
-            return "Активація акаунту";
+        switch (emailSubject) {
+            case "confirmRegistration":
+                return "Активація акаунту";
+            case "recoverPassword":
+                return "Відновлення паролю";
+            default:
+                return null;
         }
-        return null;
     }
 
     public void sendMail(final String recipient) {
@@ -95,7 +99,7 @@ public class JavaMailUtil {
             return message;
 
         } catch (MessagingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return null;
         }
 
@@ -115,7 +119,7 @@ public class JavaMailUtil {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return null;
         }
 
@@ -124,9 +128,18 @@ public class JavaMailUtil {
 
     private String replaceMarkersFromHtml(String htmlText) {
 
-        if ("confirmRegistration".equals(emailSubject)) {
-            htmlText = htmlText.replace("user", user.getUsername());
-            htmlText = htmlText.replace("link", "http://localhost:8080/registration?activationCode=" + user.getActivationCode());
+        switch (emailSubject) {
+            case "confirmRegistration" : {
+                htmlText = htmlText.replace("user", user.getUsername());
+                htmlText = htmlText.replace("link", "http://localhost:8080/registration?activationCode=" + user.getActivationCode());
+                break;
+            }
+            case "recoverPassword": {
+                verificationCode = VerificationCode.generateCode();
+                htmlText = htmlText.replace("user", user.getUsername());
+                htmlText = htmlText.replace("number", verificationCode);
+                break;
+            }
         }
 
         return htmlText;

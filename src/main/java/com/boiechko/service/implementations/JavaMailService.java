@@ -14,5 +14,14 @@ public class JavaMailService {
 
     }
 
+    public static String sendRecoveryPasswordEmail(final String recipient, final String emailSubject, final User user) {
+
+        javaMailUtil = new JavaMailUtil(emailSubject, user);
+        javaMailUtil.sendMail(recipient);
+
+        return javaMailUtil.getVerificationCode();
+
+    }
+
 }
 
