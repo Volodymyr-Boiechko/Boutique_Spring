@@ -23,5 +23,12 @@ public class JavaMailService {
 
     }
 
+    public static void sendQuestionFromUserEmail(final String recipient, final String emailSubject, final User user,
+                                                 final String comment) {
+
+        javaMailUtil = new JavaMailUtil(emailSubject, user, comment);
+        javaMailUtil.sendMail(recipient);
+    }
+
 }
 

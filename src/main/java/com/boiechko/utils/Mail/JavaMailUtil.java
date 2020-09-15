@@ -23,7 +23,7 @@ public class JavaMailUtil {
 
     private final String emailSubject;
     private String verificationCode;
-    private User user;
+    private final User user;
     private String comment;
 
     public String getVerificationCode() {
@@ -48,6 +48,8 @@ public class JavaMailUtil {
                 return "Активація акаунту";
             case "recoverPassword":
                 return "Відновлення паролю";
+            case "questionFromUser":
+                return "Запитання від користувача";
             default:
                 return null;
         }
@@ -129,7 +131,7 @@ public class JavaMailUtil {
     private String replaceMarkersFromHtml(String htmlText) {
 
         switch (emailSubject) {
-            case "confirmRegistration" : {
+            case "confirmRegistration": {
                 htmlText = htmlText.replace("user", user.getUsername());
                 htmlText = htmlText.replace("link", "http://localhost:8080/registration?activationCode=" + user.getActivationCode());
                 break;
@@ -138,6 +140,16 @@ public class JavaMailUtil {
                 verificationCode = VerificationCode.generateCode();
                 htmlText = htmlText.replace("user", user.getUsername());
                 htmlText = htmlText.replace("number", verificationCode);
+                break;
+            }
+            case "questionFromUser": {
+
+                final String[] searchList = {"firstName", "surname", "email", "phoneNumber", "comment"};
+                final String[] replaceList = {user.getFirstName(), user.getSurname(), user.getEmail(), user.getPhoneNumber(), comment};
+
+                for (int i = 0; i < searchList.length; i++) {
+                    htmlText = htmlText.replace(searchList[i], replaceList[i]);
+                }
                 break;
             }
         }
