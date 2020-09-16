@@ -1,4 +1,4 @@
-package com.boiechko.controller;
+package com.boiechko.controller.Profile;
 
 import com.boiechko.model.User;
 import com.boiechko.service.interfaces.UserProfileService;
