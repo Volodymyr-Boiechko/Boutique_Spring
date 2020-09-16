@@ -6,15 +6,22 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/footer")
 public class FooterController {
 
     private final Logger logger = Logger.getLogger(FooterController.class);
 
-    @PostMapping("/footer")
+    @GetMapping
+    public String onFooter() {
+        return "components/footer";
+    }
+
+
+    @PostMapping
+    @ResponseBody
     public ResponseEntity<Object> sendQuestion(@RequestParam("firstName") final String firstName,
                                                @RequestParam("surname") final String surname,
                                                @RequestParam("email") final String email,
