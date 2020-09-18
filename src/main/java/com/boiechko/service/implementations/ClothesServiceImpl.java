@@ -84,6 +84,12 @@ public class ClothesServiceImpl implements ClothesService {
                 .anyMatch(idProduct -> idProduct == product.getIdProduct());
     }
 
+    @Override
+    public boolean isProductInShoppingBag(final List<Product> shoppingBag, final Product product) {
+        return shoppingBag.stream()
+                .anyMatch(productFromShoppingBag -> productFromShoppingBag.equals(product));
+    }
+
     private List<Product> getClothes(final String productName, final String typeName) {
 
         if (productName == null) {

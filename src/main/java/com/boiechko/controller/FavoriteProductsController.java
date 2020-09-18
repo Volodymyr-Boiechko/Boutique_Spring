@@ -56,14 +56,18 @@ public class FavoriteProductsController {
 
             final Product product = productService.getProductById(idProduct);
 
-            List<Integer> idsOfProductsThatAreFavorite = (List<Integer>) session.getAttribute("idsOfProductsThatAreFavorite");
+            final List<Integer> idsOfProductsThatAreFavorite = (List<Integer>) session.getAttribute("idsOfProductsThatAreFavorite");
+            final List<Product> shoppingBag = (List<Product>) session.getAttribute("shoppingBag");
 
             if (!clothesService.isFavoriteProduct(idsOfProductsThatAreFavorite, product)) {
 
                 idsOfProductsThatAreFavorite.add(product.getIdProduct());
                 session.setAttribute("idsOfProductsThatAreFavorite", idsOfProductsThatAreFavorite);
 
-                logger.info("product with id: " + idProduct + " saved in favoriteProducts");
+                shoppingBag.remove(product);
+                session.setAttribute("shoppingBag", shoppingBag);
+
+                logger.info("product with id: " + idProduct + " saved in favorit    eProducts");
 
                 return ResponseEntity.status(HttpStatus.OK).body("add");
 

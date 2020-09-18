@@ -15,4 +15,6 @@ public interface ClothesService {
 
     boolean isFavoriteProduct(final List<Integer> idsOfProductsWhichAreFavorite, final Product product);
 
+    boolean isProductInShoppingBag(final List<Product> shoppingBag, final Product product);
+
 }

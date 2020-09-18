@@ -1,5 +1,6 @@
 package com.boiechko.controller.interceptors;
 
+import com.boiechko.model.Product;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,9 @@ public class MainInterceptor extends HandlerInterceptorAdapter {
         }
         if (session.getAttribute("idsOfProductsThatAreFavorite") == null){
             session.setAttribute("idsOfProductsThatAreFavorite", new ArrayList<>());
+        }
+        if (session.getAttribute("shoppingBag") == null) {
+            session.setAttribute("shoppingBag", new ArrayList<Product>());
         }
 
         return true;
