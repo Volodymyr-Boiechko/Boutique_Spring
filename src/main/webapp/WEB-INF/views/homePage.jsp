@@ -24,7 +24,7 @@
 
                 <div class="allTypes__block">
 
-                    <a href="${pageContext.request.contextPath}/manClothes/newestClothes?page=1">
+                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/newestClothes?page=1">
                         <img class="allTypes__block_image"
                              src="${pageContext.request.contextPath}/resources/img/homePage/newest.jpg" alt="shoes">
                     </a>
@@ -42,7 +42,7 @@
 
                 <div class="allTypes__block">
 
-                    <a href="${pageContext.request.contextPath}/manClothes/clothes?page=1">
+                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?page=1">
                         <img class="allTypes__block_image"
                              src="${pageContext.request.contextPath}/resources/img/homePage/clothes.png" alt="clothes">
                     </a>
@@ -60,7 +60,7 @@
 
                 <div class="allTypes__block">
 
-                    <a href="${pageContext.request.contextPath}/manClothes/shoes?page=1">
+                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?page=1">
                         <img class="allTypes__block_image"
                              src="${pageContext.request.contextPath}/resources/img/homePage/sneakers.jpg" alt="shoes">
                     </a>
@@ -78,7 +78,7 @@
 
                 <div class="allTypes__block">
 
-                    <a href="${pageContext.request.contextPath}/manClothes/accessories?page=1">
+                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?page=1">
                         <img class="allTypes__block_image"
                              src="${pageContext.request.contextPath}/resources/img/homePage/accessories.jpg"
                              alt="shoes">
@@ -106,7 +106,7 @@
         <ul class="brands__list">
 
             <li class="brands__list__element">
-                <a href="${pageContext.request.contextPath}/manClothes/brands?brand=The North Face&page=1">
+                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=The North Face&page=1">
                     <img class="brands__list__element_img"
                          src="${pageContext.request.contextPath}/resources/img/homePage/brands/north-face.png"
                          alt="North-Face">
@@ -114,7 +114,7 @@
             </li>
 
             <li class="brands__list__element" style="padding-top: 37px;">
-                <a href="${pageContext.request.contextPath}/manClothes/brands?brand=Lacoste&page=1">
+                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=Lacoste&page=1">
                     <img class="brands__list__element_img"
                          src="${pageContext.request.contextPath}/resources/img/homePage/brands/lacoste.png"
                          alt="Lacoste">
@@ -122,14 +122,14 @@
             </li>
 
             <li class="brands__list__element" style="padding-top: 45px;">
-                <a href="${pageContext.request.contextPath}/manClothes/brands?brand=Nike&page=1">
+                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=Nike&page=1">
                     <img class="brands__list__element_img"
                          src="${pageContext.request.contextPath}/resources/img/homePage/brands/nike.png" alt="Nike">
                 </a>
             </li>
 
             <li class="brands__list__element">
-                <a href="${pageContext.request.contextPath}/manClothes/brands?brand=Tommy Hilfiger&page=1">
+                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=Tommy Hilfiger&page=1">
                     <img class="brands__list__element_img"
                          src="${pageContext.request.contextPath}/resources/img/homePage/brands/tommy-hilfiger.png"
                          alt="Tommy-Hilfiger">
@@ -137,7 +137,7 @@
             </li>
 
             <li class="brands__list__element" style="padding-top: 20px;">
-                <a href="${pageContext.request.contextPath}/manClothes/brands?brand=Louis Vuitton&page=1">
+                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=Louis Vuitton&page=1">
                     <img class="brands__list__element_img"
                          src="${pageContext.request.contextPath}/resources/img/homePage/brands/louis-vuitton.png"
                          alt="Louis-Vuitton">

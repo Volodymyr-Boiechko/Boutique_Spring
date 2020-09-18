@@ -104,7 +104,9 @@
 
                         <div class="product__blockInfo__buttons">
 
-                            <button class="product__blockInfo__buttons_addToBasket">Добавити в корзину</button>
+                            <button onclick="addToShoppingBag(${product.idProduct})"
+                                    class="product__blockInfo__buttons_addToBasket">Добавити в корзину
+                            </button>
 
                             <button onclick="addToFavorite(${product.idProduct})"
                                     class="product__blockInfo__buttons_favorite">
@@ -183,7 +185,6 @@
 
 </div>
 
-
 <jsp:include page="components/footer.jsp"/>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -193,6 +194,7 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/addToFavorite.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/addToShoppingBag.js"></script>
 <script>
 
     let array = ${sessionScope.idsOfProductsThatAreFavorite};
