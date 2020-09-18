@@ -18,4 +18,6 @@ public interface UserService {
 
     void deleteUser(final User user);
 
+    boolean isUserAdmin(final User user);
+
 }

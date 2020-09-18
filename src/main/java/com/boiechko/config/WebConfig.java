@@ -1,5 +1,6 @@
 package com.boiechko.config;
 
+import com.boiechko.controller.interceptors.MainInterceptor;
 import com.boiechko.controller.interceptors.RequestUrlsInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -34,5 +35,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new RequestUrlsInterceptor());
+        registry.addInterceptor(new MainInterceptor());
     }
 }

@@ -1,6 +1,7 @@
 package com.boiechko.service.implementations;
 
 import com.boiechko.dao.interfaces.UserDao;
+import com.boiechko.enums.UserType;
 import com.boiechko.model.User;
 import com.boiechko.service.interfaces.UserService;
 import org.springframework.stereotype.Service;
@@ -35,4 +36,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(final User user) { userDao.delete(user); }
+
+    @Override
+    public boolean isUserAdmin(final User user) {
+        return user != null && user.getUserType().equals(UserType.ADMIN);
+    }
 }

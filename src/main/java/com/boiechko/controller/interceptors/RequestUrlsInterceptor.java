@@ -10,7 +10,6 @@ import java.util.Arrays;
 public class RequestUrlsInterceptor extends HandlerInterceptorAdapter {
 
     private final String[] loginRequiredUrls = {"/userProfile"};
-    private final String[] pagesComponentsUrls = {"/footer", "/header", "/navProfile"};
     private final String[] authenticationUrls = {"/login", "/registration", "/forgetPassword"};
 
     @Override
@@ -27,12 +26,7 @@ public class RequestUrlsInterceptor extends HandlerInterceptorAdapter {
             // then redirect to the homePage
             response.sendRedirect("/");
             return false;
-        } else if (isContainsUrls(request, pagesComponentsUrls)) {
-            // user tried to visit components of pages
-            // redirect to the homePage
-            response.sendRedirect("/");
-            return false;
-        } else if (!isUserLoggedIn && isContainsUrls(request, loginRequiredUrls)) {
+        } else if (!isUserLoggedIn && isLoginRequired(request, loginRequiredUrls)) {
             // user isn't logged in and the requested page requires authentication,
             // then redirect to the login page
             response.sendRedirect("/login");
@@ -44,7 +38,7 @@ public class RequestUrlsInterceptor extends HandlerInterceptorAdapter {
 
     }
 
-    private boolean isContainsUrls(final HttpServletRequest request, final String[] urlStrings) {
+    private boolean isLoginRequired(final HttpServletRequest request, final String[] urlStrings) {
 
         return Arrays.stream(urlStrings)
                 .anyMatch(request.getRequestURL().toString()::contains);
