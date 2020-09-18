@@ -21,7 +21,7 @@
 
             <img src="${pageContext.request.contextPath}/resources/img/other/sad_smile.png" alt="sadSmile">
 
-            <div class="headerClothes__title">На жаль такого типу продукту не знайдено</div>
+            <div class="headerClothes__title">На жаль, такого типу продукту не знайдено</div>
 
             <div class="headerClothes__descr"></div>
 
@@ -43,7 +43,7 @@
 
                             <div class="block col-md-4" id="${product.idProduct}">
 
-                                <a href="${pageContext.request.contextPath}/manClothes/productItem?idProduct=${product.idProduct}">
+                                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/productItem/${product.idProduct}">
 
                                     <div class="clothes__block">
 

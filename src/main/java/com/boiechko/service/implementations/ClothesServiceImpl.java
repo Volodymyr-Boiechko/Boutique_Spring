@@ -35,7 +35,7 @@ public class ClothesServiceImpl implements ClothesService {
             case "sportWear": {
 
                 final String productName = request.getParameter("productName");
-                clothes = getClothes(productName, urlPages[2]);
+                clothes = getClothes(productName, urlPages[3]);
                 break;
             }
             case "newestClothes": {
@@ -87,26 +87,9 @@ public class ClothesServiceImpl implements ClothesService {
     private List<Product> getClothes(final String productName, final String typeName) {
 
         if (productName == null) {
-            return productService.getProductsByColumnInRandomOrder("typeName", getTypeName(typeName));
+            return productService.getProductsByColumnInRandomOrder("typeName", productService.getUkrainianTypeName(typeName));
         } else {
             return productService.getProductsByColumnInRandomOrder("productName", productName);
-        }
-    }
-
-    private String getTypeName(final String name) {
-
-        switch (name) {
-            case "clothes":
-                return "Одяг";
-            case "shoes":
-                return "Взуття";
-            case "accessories":
-                return "Аксесуари";
-            case "sportWear":
-                return "Спортивний одяг";
-            default:
-                return null;
-
         }
     }
 

@@ -6,11 +6,9 @@ import com.boiechko.service.interfaces.ProductService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,6 +60,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getProductsThatUserMayLike(final Product product) {
+        return productDao.getProductsByColumnInRandomOrder("productName", product.getProductName())
+                .stream()
+                .filter(element -> !element.equals(product))
+                .limit(4)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void addProduct(final Product product) {
         productDao.add(product);
     }
@@ -87,7 +94,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean saveImage(final Part image, final String destination) {
+    public boolean saveImageOfProduct(final Part image, final String destination) {
 
         final String imagePath = PATH_TO_DATABASE_IMAGES + destination.replace("/", "\\");
 
@@ -130,18 +137,39 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<String> getPathToProduct(final HttpServletRequest request, final Product product) {
+    public String getUkrainianSex(final String englishSex) {
 
-        final String[] urlPages = request.getRequestURI().split("/");
-        final String sex = urlPages[1].equals("manClothes") ? "Чоловіче" : "Жіноче";
-
-        return Arrays.asList(sex, getTypeName(product.getTypeName()));
+        if (englishSex.equals("womanClothes")){
+            return "Жіночий одяг";
+        } else {
+            return "Чоловічий одяг";
+        }
 
     }
 
-    private String getTypeName(final String name) {
+    @Override
+    public String getUkrainianTypeName(final String englishTypeName) {
 
-        switch (name) {
+        switch (englishTypeName) {
+            case "clothes":
+                return "Одяг";
+            case "shoes":
+                return "Взуття";
+            case "accessories":
+                return "Аксесуари";
+            case "sportWear":
+                return "Спортивний одяг";
+            default:
+                return null;
+
+        }
+
+    }
+
+    @Override
+    public String getEnglishTypeName(final String ukrainianTypeName) {
+
+        switch (ukrainianTypeName) {
             case "Одяг":
                 return "clothes";
             case "Взуття":

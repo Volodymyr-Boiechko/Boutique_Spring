@@ -2,7 +2,6 @@ package com.boiechko.service.interfaces;
 
 import com.boiechko.model.Product;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.util.List;
 
@@ -18,6 +17,8 @@ public interface ProductService {
 
     List<Product> getPopularBrands();
 
+    List<Product> getProductsThatUserMayLike(final Product product);
+
     void addProduct(final Product product);
 
     Product getProductById(final int idProduct);
@@ -28,11 +29,14 @@ public interface ProductService {
 
     void deleteProduct(final Product product);
 
-    boolean saveImage(final Part image, final String destination);
+    boolean saveImageOfProduct(final Part image, final String destination);
 
     String getDestinationOfImage(final Part image, final String destination);
 
-    List<String> getPathToProduct(final HttpServletRequest request, final Product product);
+    String getUkrainianSex(final String englishSex);
 
+    String getUkrainianTypeName(final String englishTypeName);
+
+    String getEnglishTypeName(final String ukrainianTypeName);
 
 }
