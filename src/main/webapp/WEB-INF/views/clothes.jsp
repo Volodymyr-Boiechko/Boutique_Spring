@@ -72,7 +72,7 @@
                                     </div>
                                 </a>
 
-                                <button class="clothes__block__img__favorite">
+                                <button onclick="addToFavorite(${product.idProduct})" class="clothes__block__img__favorite">
 
                                     <img class="clothes__block__img__favorite_img" id="favorite"
                                          src="${pageContext.request.contextPath}/resources/img/other/favorite.png"
@@ -118,7 +118,31 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/addToFavorite.js"></script>
 <script>
+
+    let array = ${idsOfProductsThatAreFavorite};
+
+    setInterval(function () {
+
+        let blocks = document.querySelectorAll('.block');
+
+        for (let i = 0; i < blocks.length; i++) {
+
+            let id = blocks[i].getAttribute('id');
+
+            for (let j = 0; j < array.length; j++) {
+
+                if (parseInt(id) === array[j]) {
+
+                    let img = blocks[i].querySelector('#favorite');
+                    img.src = "${pageContext.request.contextPath}/resources/img/other/favoriteFull.png";
+                    break;
+
+                }
+            }
+        }
+    }, 1);
 
     function morePages() {
 

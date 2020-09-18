@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClothesServiceImpl implements ClothesService {
@@ -67,6 +68,20 @@ public class ClothesServiceImpl implements ClothesService {
         }
 
         return NumberOfProductsShownOnPage;
+    }
+
+    @Override
+    public List<Product> getFavoriteProducts(final List<Integer> idsOfProductsWhichAreFavorite) {
+
+        return idsOfProductsWhichAreFavorite.stream()
+                .map(productService::getProductById)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean isFavoriteProduct(List<Integer> idsOfProductsWhichAreFavorite, Product product) {
+        return idsOfProductsWhichAreFavorite.stream()
+                .anyMatch(idProduct -> idProduct == product.getIdProduct());
     }
 
     private List<Product> getClothes(final String productName, final String typeName) {

@@ -92,7 +92,7 @@
                             </a>
                         </div>
                     </div>
-                    <a class="header__icons_icon" href="${pageContext.request.contextPath}/favorite">
+                    <a class="header__icons_icon" href="${pageContext.request.contextPath}/favoriteProducts">
                         <img class="header__icons_icon_img"
                              src="${pageContext.request.contextPath}/resources/img/header/favorite.png" alt="favorite">
                     </a>

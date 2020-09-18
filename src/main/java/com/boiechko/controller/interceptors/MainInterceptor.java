@@ -5,6 +5,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 public class MainInterceptor extends HandlerInterceptorAdapter {
 
@@ -17,7 +18,9 @@ public class MainInterceptor extends HandlerInterceptorAdapter {
         if (session.getAttribute("sex") == null) {
             session.setAttribute("sex", "manClothes");
         }
-
+        if (session.getAttribute("idsOfProductsThatAreFavorite") == null){
+            session.setAttribute("idsOfProductsThatAreFavorite", new ArrayList<>());
+        }
 
         return true;
     }
