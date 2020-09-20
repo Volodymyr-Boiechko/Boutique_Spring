@@ -56,11 +56,11 @@
 
                 </form>
 
-                <%--<c:if test="${canPersonDeleteAddress}">--%>
-                <button onclick="deleteAddress(${address.idAddress})"
-                        class="info__form__button active_button delete">Видалити адресу
-                </button>
-                <%--</c:if>--%>
+                <c:if test="${canUserDeleteAddress}">
+                    <button onclick="deleteAddress(${address.idAddress})"
+                            class="info__form__button active_button delete">Видалити адресу
+                    </button>
+                </c:if>
 
             </div>
 

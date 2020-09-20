@@ -1,6 +1,9 @@
 package com.boiechko.service.interfaces;
 
 import com.boiechko.model.Address;
+import com.boiechko.model.Order;
+
+import java.util.List;
 
 public interface AddressService {
 
@@ -12,5 +15,6 @@ public interface AddressService {
 
     void deleteAddress(final Address address);
 
+    List<Boolean> isUserCanDeleteAddress(final List<Address> addresses, final List<Order> orders);
 
 }

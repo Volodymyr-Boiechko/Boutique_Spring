@@ -6,6 +6,7 @@ import com.boiechko.model.User;
 import com.boiechko.service.interfaces.AddressService;
 import com.boiechko.service.interfaces.ClothesService;
 import com.boiechko.service.interfaces.OrderDetailsService;
+import com.boiechko.service.interfaces.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,20 +16,21 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/userProfile/userOrders")
 public class UserProfileOrdersController {
 
+    final private OrderService orderService;
     final private OrderDetailsService orderDetailsService;
     final private AddressService addressService;
     final private ClothesService clothesService;
 
 
-    public UserProfileOrdersController(OrderDetailsService orderDetailsService, AddressService addressService, ClothesService clothesService) {
+    public UserProfileOrdersController(OrderService orderService, OrderDetailsService orderDetailsService,
+                                       AddressService addressService, ClothesService clothesService) {
+        this.orderService = orderService;
         this.orderDetailsService = orderDetailsService;
         this.addressService = addressService;
         this.clothesService = clothesService;
@@ -42,10 +44,7 @@ public class UserProfileOrdersController {
 
         final User user = (User) session.getAttribute("user");
 
-        final Map<Order, Set<Product>> allOrdersOfUser = new HashMap<>();
-        user.getOrders().forEach(order -> allOrdersOfUser.put(order, order.getProducts()));
-
-        model.addAttribute("allOrdersOfUser", allOrdersOfUser);
+        model.addAttribute("allOrdersOfUser", orderService.sortUserOrders(user.getOrders()));
 
         return "Profile/Orders/orders";
 

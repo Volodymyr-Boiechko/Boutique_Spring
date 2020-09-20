@@ -153,7 +153,7 @@
                                             <img src="${pageContext.request.contextPath}/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
-                                            <div class="hover"></div>
+                                            <div class="hoverHeader"></div>
 
                                         </a>
                                     </c:forEach>
@@ -279,7 +279,7 @@
                                             <img src="${pageContext.request.contextPath}/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
-                                            <div class="hover"></div>
+                                            <div class="hoverHeader"></div>
                                         </a>
                                     </c:forEach>
                                 </ul>
@@ -353,7 +353,7 @@
                                             <img src="${pageContext.request.contextPath}/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
-                                            <div class="hover"></div>
+                                            <div class="hoverHeader"></div>
 
                                         </a>
 
@@ -406,7 +406,7 @@
                                             <img src="${pageContext.request.contextPath}/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
-                                            <div class="hover"></div>
+                                            <div class="hoverHeader"></div>
 
                                         </a>
                                     </c:forEach>
@@ -455,7 +455,7 @@
                                             <img src="${pageContext.request.contextPath}/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
-                                            <div class="hover"></div>
+                                            <div class="hoverHeader"></div>
 
                                         </a>
                                     </c:forEach>

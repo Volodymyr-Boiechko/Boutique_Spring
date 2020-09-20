@@ -60,11 +60,10 @@
 
                             </a>
 
-                            <%--<c:if test="${canPersonDeleteAddress.get(status.index)}">--%>
+                            <c:if test="${canUserDeleteAddress.get(status.index)}">
 
                                 <button onclick="deleteAddress(${address.idAddress})" style="margin-top: 12px;"
-                                        class="address__block__icons__href"
-                                        href="${pageContext.request.contextPath}/userProfile/userAddresses/deleteAddress/${address.idAddress}">
+                                        class="address__block__icons__href">
 
                                     <div class="address__block__icons__href_text">Видалити</div>
                                     <img class="address__block__icons__href_icon"
@@ -73,7 +72,7 @@
 
                                 </button>
 
-                            <%--</c:if>--%>
+                            </c:if>
 
                         </div>
 
