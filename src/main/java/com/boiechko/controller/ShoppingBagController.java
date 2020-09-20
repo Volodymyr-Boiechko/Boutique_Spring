@@ -16,6 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
@@ -38,7 +39,7 @@ public class ShoppingBagController {
         final ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         final HttpSession session = attributes.getRequest().getSession();
 
-        final List<Product> productsOfShoppingBag = (List<Product>) session.getAttribute("shoppingBag");
+        final Set<Product> productsOfShoppingBag = (Set<Product>) session.getAttribute("shoppingBag");
 
         if (productsOfShoppingBag != null && productsOfShoppingBag.size() != 0) {
 
@@ -69,7 +70,7 @@ public class ShoppingBagController {
         if (user != null) {
 
             final Product product = productService.getProductById(idProduct);
-            final List<Product> shoppingBag = (List<Product>) session.getAttribute("shoppingBag");
+            final Set<Product> shoppingBag = (Set<Product>) session.getAttribute("shoppingBag");
             final List<Integer> idsOfProductsWhichAreFavorite = (List<Integer>) session.getAttribute("idsOfProductsThatAreFavorite");
 
             if (!clothesService.isProductInShoppingBag(shoppingBag, product)) {
@@ -104,7 +105,7 @@ public class ShoppingBagController {
 
         Product product = productService.getProductById(idProduct);
 
-        final List<Product> shoppingBag = (List<Product>) session.getAttribute("shoppingBag");
+        final Set<Product> shoppingBag = (Set<Product>) session.getAttribute("shoppingBag");
         shoppingBag.remove(product);
         session.setAttribute("shoppingBag", shoppingBag);
 

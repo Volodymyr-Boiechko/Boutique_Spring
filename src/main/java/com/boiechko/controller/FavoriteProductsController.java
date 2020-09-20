@@ -15,6 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/favoriteProducts")
@@ -57,7 +58,7 @@ public class FavoriteProductsController {
             final Product product = productService.getProductById(idProduct);
 
             final List<Integer> idsOfProductsThatAreFavorite = (List<Integer>) session.getAttribute("idsOfProductsThatAreFavorite");
-            final List<Product> shoppingBag = (List<Product>) session.getAttribute("shoppingBag");
+            final Set<Product> shoppingBag = (Set<Product>) session.getAttribute("shoppingBag");
 
             if (!clothesService.isFavoriteProduct(idsOfProductsThatAreFavorite, product)) {
 

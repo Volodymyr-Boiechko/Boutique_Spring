@@ -1,5 +1,6 @@
 package com.boiechko.service.implementations;
 
+import com.boiechko.model.OrderDetails;
 import com.boiechko.model.Product;
 import com.boiechko.service.interfaces.ClothesService;
 import com.boiechko.service.interfaces.ProductService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -85,9 +87,25 @@ public class ClothesServiceImpl implements ClothesService {
     }
 
     @Override
-    public boolean isProductInShoppingBag(final List<Product> shoppingBag, final Product product) {
+    public boolean isProductInShoppingBag(final Set<Product> shoppingBag, final Product product) {
         return shoppingBag.stream()
                 .anyMatch(productFromShoppingBag -> productFromShoppingBag.equals(product));
+    }
+
+    public void updateOrderDetailsInProducts(final Set<Product> products, final List<OrderDetails> orderDetails) {
+
+        for (Product product: products) {
+
+            for (OrderDetails orderDetail: orderDetails) {
+
+                if (product.getIdProduct() == orderDetail.getIdProduct()) {
+                    product.setQuantity(orderDetail.getQuantity());
+                }
+
+            }
+
+        }
+
     }
 
     private List<Product> getClothes(final String productName, final String typeName) {

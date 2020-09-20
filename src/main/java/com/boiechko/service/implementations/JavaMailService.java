@@ -1,7 +1,11 @@
 package com.boiechko.service.implementations;
 
+import com.boiechko.model.Order;
+import com.boiechko.model.Product;
 import com.boiechko.model.User;
 import com.boiechko.utils.Mail.JavaMailUtil;
+
+import java.util.Set;
 
 public class JavaMailService {
 
@@ -27,6 +31,13 @@ public class JavaMailService {
                                                  final String comment) {
 
         javaMailUtil = new JavaMailUtil(emailSubject, user, comment);
+        javaMailUtil.sendMail(recipient);
+    }
+
+    public static void sendOrderDetailsEmail(final String recipient, final String emailSubject, final Order order,
+                                             final Set<Product> shoppingBag) {
+
+        javaMailUtil = new JavaMailUtil(emailSubject, order, shoppingBag);
         javaMailUtil.sendMail(recipient);
     }
 

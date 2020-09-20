@@ -1,8 +1,6 @@
 package com.boiechko.config;
 
-import com.boiechko.model.Address;
-import com.boiechko.model.Product;
-import com.boiechko.model.User;
+import com.boiechko.model.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +23,7 @@ public class HibernateConfig {
 
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setConfigLocation(applicationContext.getResource("classpath:hibernate.cfg.xml"));
-        factoryBean.setAnnotatedClasses(User.class, Address.class, Product.class);
+        factoryBean.setAnnotatedClasses(User.class, Address.class, Product.class, Order.class, OrderDetails.class);
 
         return factoryBean;
 

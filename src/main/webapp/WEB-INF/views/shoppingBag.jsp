@@ -351,6 +351,51 @@
 
     }
 
+    function makeOrder() {
+
+        let success = false;
+
+        let dateObject = new Date();
+        let date = dateObject.toLocaleString("sv-SE");
+
+        let addressSelect = document.getElementById('selectAddresses');
+
+        $.ajax({
+
+            url: '/makeOrder',
+            type: 'POST',
+            data_type: 'json',
+            async: false,
+            data: {
+                json: selectElement,
+                totalPrice: formPrice(),
+                dateOrder: date,
+                idAddress: addressSelect.options[addressSelect.selectedIndex].getAttribute('name'),
+                text: document.getElementById('text').outerHTML
+            }
+
+        }).done(function (response) {
+
+            success = true
+            console.log(response.status);
+
+            alert('Ваше замовлення прийнято. Лист з замовленням прийде Вам на пошту');
+            location.reload();
+
+        }).fail(function (response) {
+
+            console.log(response.status);
+            success = false;
+
+            if (response.status === 500) {
+                alert("Не вдалось зробити замовлення");
+            }
+
+        });
+
+        return success;
+    }
+
 </script>
 </body>
 </html>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class MainInterceptor extends HandlerInterceptorAdapter {
 
@@ -23,7 +24,7 @@ public class MainInterceptor extends HandlerInterceptorAdapter {
             session.setAttribute("idsOfProductsThatAreFavorite", new ArrayList<>());
         }
         if (session.getAttribute("shoppingBag") == null) {
-            session.setAttribute("shoppingBag", new ArrayList<Product>());
+            session.setAttribute("shoppingBag", new HashSet<Product>());
         }
 
         return true;
