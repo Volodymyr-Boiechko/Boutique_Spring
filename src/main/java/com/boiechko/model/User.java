@@ -1,6 +1,8 @@
 package com.boiechko.model;
 
 import com.boiechko.enums.UserType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -58,12 +60,17 @@ public class User {
             fetch = FetchType.EAGER)
     private List<Address> addresses;
 
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Order> orders;
+
     public User() {
     }
 
     public User(@NotNull int idUser, @NotNull String username, @NotNull String password, String firstName,
                 String surname, @NotNull Date birthDate, @Email @NotNull String email, String phoneNumber,
-                @NotNull UserType userType, String activationCode, List<Address> addresses) {
+                @NotNull UserType userType, String activationCode, List<Address> addresses, List<Order> orders) {
         this.idUser = idUser;
         this.username = username;
         this.password = password;
@@ -75,6 +82,7 @@ public class User {
         this.userType = userType;
         this.activationCode = activationCode;
         this.addresses = addresses;
+        this.orders = orders;
     }
 
     public User(@NotNull String username, @NotNull String password, @NotNull Date birthDate,
@@ -178,9 +186,16 @@ public class User {
         return addresses;
     }
 
+    public List<Order> getOrders() { return orders; }
+
     public void addAddress(final Address address) {
         address.setUser(this);
         addresses.add(address);
+    }
+
+    public void addOrder(final Order order) {
+        order.setUser(this);
+        orders.add(order);
     }
 
     @Override
@@ -218,6 +233,7 @@ public class User {
                 ", userType=" + userType +
                 ", activationCode='" + activationCode + '\'' +
                 ", addresses=\n" + addresses +
+                ", orders=\n" + orders +
                 '}';
     }
 }

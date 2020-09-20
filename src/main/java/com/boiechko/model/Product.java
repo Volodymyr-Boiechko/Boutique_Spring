@@ -48,6 +48,8 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    private int quantity;
+
     public Product(){
     }
 
@@ -124,6 +126,10 @@ public class Product {
     public String getDescription() { return description; }
 
     public void setDescription(String description) { this.description = description; }
+
+    public int getQuantity() { return quantity; }
+
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 
     @Override
     public boolean equals(Object o) {
