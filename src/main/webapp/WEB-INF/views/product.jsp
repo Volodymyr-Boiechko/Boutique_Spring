@@ -45,7 +45,7 @@
 
                 <div class="product__image">
 
-                    <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.productName}">
+                    <img src="${pageContext.request.contextPath}/resources/${product.image}" alt="${product.productName}">
 
                 </div>
 
@@ -153,7 +153,7 @@
                             <div class="clothes__block__img clothes__block__img_mini">
 
                                 <img class="clothes__block__img_main"
-                                     src="${pageContext.request.contextPath}/${product.image}"
+                                     src="${pageContext.request.contextPath}/resources/${product.image}"
                                      alt="${product.productName}">
 
                                 <div class="hover"></div>

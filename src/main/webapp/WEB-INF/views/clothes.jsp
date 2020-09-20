@@ -50,7 +50,7 @@
                                         <div class="clothes__block__img">
 
                                             <img class="clothes__block__img_main"
-                                                 src="${pageContext.request.contextPath}/${product.image}"
+                                                 src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
 
                                             <div class="hover"></div>
@@ -72,7 +72,8 @@
                                     </div>
                                 </a>
 
-                                <button onclick="addToFavorite(${product.idProduct})" class="clothes__block__img__favorite">
+                                <button onclick="addToFavorite(${product.idProduct})"
+                                        class="clothes__block__img__favorite">
 
                                     <img class="clothes__block__img__favorite_img" id="favorite"
                                          src="${pageContext.request.contextPath}/resources/img/other/favorite.png"
@@ -83,6 +84,29 @@
                             </div>
 
                         </c:forEach>
+
+                        <c:if test="${not empty sessionScope.user}">
+
+                            <c:if test="${isUserCanAddClothes}">
+
+                                <div class="col-md-4">
+
+                                    <div class="clothes__block" style="border: 0.5px grey solid;">
+
+                                        <button name="addButton" class="clothes__block__addButton" id="addButton">
+
+                                            <img src="${pageContext.request.contextPath}/resources/img/other/add.jpg"
+                                                 alt="add">
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </c:if>
+
+                        </c:if>
 
                     </div>
 
@@ -110,6 +134,8 @@
 
 </c:choose>
 
+<div id="modalAddClothes"></div>
+
 <jsp:include page="components/footer.jsp"/>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -119,9 +145,9 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/addToFavorite.js"></script>
-<script>
+<script charset="utf-8">
 
-    let array = ${idsOfProductsThatAreFavorite};
+    let array = ${sessionScope.idsOfProductsThatAreFavorite};
 
     setInterval(function () {
 
@@ -146,7 +172,7 @@
 
     function morePages() {
 
-        let page = ${pageNumber} + 1;
+        let page = ${pageNumber} +1;
 
         let href = window.location.href;
 
@@ -166,6 +192,173 @@
     window.onbeforeunload = function (e) {
         localStorage.setItem('scrollPos', window.scrollY);
     };
+
+    let isUserAdmin = ${isUserCanAddClothes};
+
+    if (isUserAdmin === true) {
+
+        $(document).ready(function () {
+
+            $('#addButton').on('click', function () {
+                $('#addOverlay, #add').fadeIn('slow');
+            });
+
+            $('.modalw__close').on('click', function () {
+                $('#addOverlay, #add, #thanks').fadeOut('slow');
+                location.reload();
+            });
+
+        });
+
+        let typeName = "${sessionScope.clothes.get(0).typeName}";
+        let productName = "${sessionScope.clothes.get(0).productName}";
+        let sex = "${sessionScope.clothes.get(0).sex}";
+
+        document.getElementById("modalAddClothes").innerHTML =
+            "<div class=\"overlay\" id=\"addOverlay\">\n" +
+            "    <div class=\"modalw modalw_call modalw_addProduct\" id=\"add\">\n" +
+            "        <div class=\"modalw__close modalw__close_call\">&times;</div>\n" +
+            "        <form id=\"addClothesForm\" class=\"feed-form\">\n" +
+            "\n" +
+            "            <ul>\n" +
+            "                <div class=\"feed-form__title\">Заповніть поля для добавлення<br> товару на сайт</div>\n" +
+            "                <li class=\"top\">\n" +
+            "                    <label>\n" +
+            "                        <input class=\"input\" id=\"type\" placeholder=\"Тип товару\" type=\"text\" value=\"" + typeName + "\">\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li>\n" +
+            "                    <label>\n" +
+            "                        <input class=\"input\" id=\"product\" placeholder=\"Підтип товару\" value=\"" + productName + "\" type=\"text\">\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li>\n" +
+            "                    <label>\n" +
+            "                        <input class=\"input\" id=\"sex\" placeholder=\"Стать(чоловік/жінка)\" value=\"" + sex + "\" type=\"text\">\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li>\n" +
+            "                    <label>\n" +
+            "                        <input class=\"input\" id=\"brand\" placeholder=\"Бренд товару\" type=\"text\">\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li>\n" +
+            "                    <label>\n" +
+            "                        <input name=\"model\" class=\"input\" id=\"model\" placeholder=\"Модель товару(не обов'язково)\" type=\"text\">\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li>\n" +
+            "                    <label>\n" +
+            "                        <input class=\"input\" id=\"size\" placeholder=\"Розмір товару(не обов'язково)\" type=\"text\">\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li>\n" +
+            "                    <label>\n" +
+            "                        <input class=\"input\" id=\"color\" placeholder=\"Колір товару(не обов'язково)\" type=\"text\">\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li>\n" +
+            "                    <label>\n" +
+            "                        <input class=\"input\" id=\"image\" placeholder=\"Зображення\" type=\"file\">\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li>\n" +
+            "                    <label>\n" +
+            "                        <input class=\"input\" id=\"destination\" placeholder=\"Де повинен зберігатись файл\" type=\"text\">\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li>\n" +
+            "                    <label>\n" +
+            "                        <input class=\"input\" id=\"price\" placeholder=\"Ціна товару\" type=\"text\">\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li style=\"height: 85px;\">\n" +
+            "                    <label>\n" +
+            "                        <textarea class=\"input input_com\" id=\"description\" placeholder=\"Опис товару\"></textarea>\n" +
+            "                    </label>\n" +
+            "                </li>\n" +
+            "\n" +
+            "                <li>\n" +
+            "                    <button id=\"button\" class=\"modalw__button\">Добавити до бази</button>\n" +
+            "                </li>\n" +
+            "\n" +
+            "            </ul>\n" +
+            "\n" +
+            "        </form>\n" +
+            "    </div>\n" +
+            "    <div class=\"modalw modalw_mini\" id=\"thanks\">\n" +
+            "        <div class=\"modalw__close\">&times;</div>\n" +
+            "        <div class=\"modalw__subtitle\">Продукт добавлено</div>\n" +
+            "    </div>\n" +
+            "</div>";
+
+        document.getElementById("addClothesForm").onsubmit = function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+
+                url: "/clothes",
+                async: false,
+                type: "POST",
+                processData: false,
+                cache: false,
+                contentType: false,
+                data: formData()
+
+            }).done(function (response) {
+
+                console.log(response.status);
+
+                $('#add').fadeOut('fast');
+                $('#thanks').fadeIn('slow');
+                $('#addForm').trigger('reset');
+
+            }).fail(function (response) {
+
+                console.log(response.status);
+
+                if (response.status === 500) {
+                    alert("Виникла помилка на сервері");
+                } else if (response.status === 501) {
+                    alert("Не вдалось зберегти зображення");
+                }
+
+            });
+
+        };
+
+        function formData() {
+
+            let formData = new FormData();
+
+            formData.append("image", document.getElementById('image').files[0]);
+            formData.append("typeName", document.getElementById('type').value);
+            formData.append("productName", document.getElementById('product').value);
+            formData.append("sex", document.getElementById('sex').value);
+            formData.append("brand", document.getElementById('brand').value);
+            formData.append("model", document.getElementById('model').value);
+            formData.append("size", document.getElementById('size').value);
+            formData.append("color", document.getElementById('color').value);
+            formData.append("destination", document.getElementById('destination').value);
+            formData.append("price", document.getElementById('price').value);
+            formData.append("description", document.getElementById('description').value);
+
+            return formData;
+
+        }
+
+    }
 
 </script>
 </body>

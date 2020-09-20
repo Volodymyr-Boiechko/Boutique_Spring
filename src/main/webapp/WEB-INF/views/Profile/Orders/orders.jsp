@@ -83,7 +83,7 @@
                                                     </div>
 
                                                 </c:if>
-                                                <img src="${pageContext.request.contextPath}/${listEl.image}"
+                                                <img src="${pageContext.request.contextPath}/resources/${listEl.image}"
                                                      alt="${listEl.typeName}">
                                             </a>
 

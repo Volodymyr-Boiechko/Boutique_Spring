@@ -187,11 +187,11 @@ public class JavaMailUtil {
             messageBodyPart.setContent(replaceMarkersFromHtml(addProducts(htmlCode)), "text/html;charset=UTF-8");
             multipart.addBodyPart(messageBodyPart);
 
-            final String path = "C:\\Users\\volod\\IdeaProjects\\Boutique_Spring\\src\\main\\webapp\\";
+            final String path = "C:\\Users\\volod\\IdeaProjects\\Boutique_Spring\\src\\main\\webapp\\resources\\";
 
             for (Product product : products) {
 
-                String imagePath = path + product.getImage().replace("/", "\\");
+                final String imagePath = path + product.getImage().replace("/", "\\");
 
                 MimeBodyPart imagePart = new MimeBodyPart();
                 try {

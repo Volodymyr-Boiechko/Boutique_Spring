@@ -1,8 +1,8 @@
 package com.boiechko.service.interfaces;
 
 import com.boiechko.model.Product;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Part;
 import java.util.List;
 
 public interface ProductService {
@@ -29,9 +29,9 @@ public interface ProductService {
 
     void deleteProduct(final Product product);
 
-    boolean saveImageOfProduct(final Part image, final String destination);
+    boolean saveImageOfProduct(final MultipartFile image, final String destination);
 
-    String getDestinationOfImage(final Part image, final String destination);
+    String getDestinationOfImage(final MultipartFile image, final String destination);
 
     String getUkrainianSex(final String englishSex);
 

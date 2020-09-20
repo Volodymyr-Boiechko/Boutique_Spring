@@ -150,7 +150,7 @@
 
                                         <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=${product.brand}&page=1">
 
-                                            <img src="${pageContext.request.contextPath}/${product.image}"
+                                            <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
                                             <div class="hoverHeader"></div>
@@ -259,7 +259,7 @@
 
                                         <li>
                                             <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brand=${product.brand}&page=1">
-                                                <img src="${pageContext.request.contextPath}/${product.image}"
+                                                <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                      alt="${product.productName}">
                                                 <div>${product.brand}</div>
                                             </a>
@@ -276,7 +276,7 @@
 
                                         <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brand=${product.brand}&page=1">
 
-                                            <img src="${pageContext.request.contextPath}/${product.image}"
+                                            <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
                                             <div class="hoverHeader"></div>
@@ -330,7 +330,7 @@
 
                                         <li>
                                             <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brand=${product.brand}&page=1">
-                                                <img src="${pageContext.request.contextPath}/${product.image}"
+                                                <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                      alt="${product.productName}">
                                                 <div>${product.brand}</div>
                                             </a>
@@ -350,7 +350,7 @@
 
                                         <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brand=${product.brand}&page=1">
 
-                                            <img src="${pageContext.request.contextPath}/${product.image}"
+                                            <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
                                             <div class="hoverHeader"></div>
@@ -403,7 +403,7 @@
 
                                         <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/sportWear?brand=${product.brand}&page=1">
 
-                                            <img src="${pageContext.request.contextPath}/${product.image}"
+                                            <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
                                             <div class="hoverHeader"></div>
@@ -452,7 +452,7 @@
 
                                         <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=${product.brand}&page=1">
 
-                                            <img src="${pageContext.request.contextPath}/${product.image}"
+                                            <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
                                             <div class="hoverHeader"></div>

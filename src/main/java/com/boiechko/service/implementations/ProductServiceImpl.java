@@ -5,12 +5,13 @@ import com.boiechko.model.Product;
 import com.boiechko.service.interfaces.ProductService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,7 +19,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final Logger logger = Logger.getLogger(ProductServiceImpl.class);
 
-    private final String PATH_TO_DATABASE_IMAGES = "C:\\Users\\volod\\IdeaProjects\\Boutique_Spring\\src\\main\\webapp\\resources\\dataBaseImages";
+    private final String PATH_TO_DATABASE_IMAGES = "C:\\Users\\volod\\IdeaProjects\\Boutique_Spring\\src\\main\\webapp\\resources\\dataBaseImages\\";
 
     private final ProductDao productDao;
 
@@ -94,7 +95,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean saveImageOfProduct(final Part image, final String destination) {
+    public boolean saveImageOfProduct(final MultipartFile image, final String destination) {
 
         final String imagePath = PATH_TO_DATABASE_IMAGES + destination.replace("/", "\\");
 
@@ -109,13 +110,14 @@ public class ProductServiceImpl implements ProductService {
 
         }
 
-        final String imageName = image.getSubmittedFileName();
+        final String fileName = image.getOriginalFilename();
 
-        if (validateImage(imageName)) {
+        if (validateImage(Objects.requireNonNull(fileName))) {
             try {
-                image.write(imagePath + File.separator + imageName);
+                image.transferTo(new File(imagePath + File.separator + fileName));
             } catch (IOException e) {
                 logger.error(e.getMessage());
+                return false;
             }
         } else {
             return false;
@@ -127,13 +129,13 @@ public class ProductServiceImpl implements ProductService {
 
     private boolean validateImage(final String imageName) {
 
-        final String fileExt = imageName.substring(imageName.length() - 3);
-        return "jpg".equals(fileExt) || "png".equals(fileExt) || "gif".equals(fileExt);
+        return imageName.contains("jpg") || imageName.contains("png") || imageName.contains("gif");
     }
 
     @Override
-    public String getDestinationOfImage(final Part image, final String destination) {
-        return destination + "/" + image.getSubmittedFileName();
+    public String getDestinationOfImage(final MultipartFile image, final String destination) {
+
+        return "dataBaseImages/" + destination + "/" + image.getOriginalFilename();
     }
 
     @Override

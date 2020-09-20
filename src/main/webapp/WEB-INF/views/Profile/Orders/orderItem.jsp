@@ -72,7 +72,7 @@
 
                                 <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/productItem/${product.idProduct}"
                                    class="orderItem__block__products__block__img">
-                                    <img src="${pageContext.request.contextPath}/${product.image}"
+                                    <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                          alt="${product.typeName}">
                                 </a>
 
