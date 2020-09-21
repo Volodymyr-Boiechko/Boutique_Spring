@@ -148,7 +148,7 @@
 
                                     <c:forEach items="${newestProducts}" var="product" begin="0" end="2">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=${product.brand}&page=1">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?productName=${product.productName}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
@@ -196,7 +196,7 @@
 
                             <li class="subheader__list__dropdown__list__elem">
 
-                                <ul class="subheader__list__dropdown__list__elem_images"">
+                                <ul class="subheader__list__dropdown__list__elem_images">
 
                                     <c:forEach items="${clothesTypes}" var="product" end="1">
 

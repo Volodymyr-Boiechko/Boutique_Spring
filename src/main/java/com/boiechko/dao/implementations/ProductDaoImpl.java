@@ -40,19 +40,6 @@ public class ProductDaoImpl implements ProductDao {
 
         return query.list();
 
-
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Product> groupByColumnWithCondition(final String condition, final String statement, final String column) {
-
-        Query<Product> query = sessionFactory.getCurrentSession()
-                .createQuery("FROM Product WHERE " + condition + "=?1 GROUP BY " + column)
-                .setParameter(1, statement);
-
-        return query.list();
-
     }
 
     @Override

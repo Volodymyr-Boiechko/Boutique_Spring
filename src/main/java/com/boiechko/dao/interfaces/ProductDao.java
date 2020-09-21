@@ -10,8 +10,6 @@ public interface ProductDao extends Dao<Product> {
 
     List<Product> getLatestAddedProducts();
 
-    List<Product> groupByColumnWithCondition(final String condition, final String statement, final String column);
-
     List<Product> groupByColumn(final String column);
 
 }

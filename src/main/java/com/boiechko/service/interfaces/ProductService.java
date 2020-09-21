@@ -11,13 +11,15 @@ public interface ProductService {
 
     List<Product> getLatestAddedProducts();
 
-    List<Product> groupByColumnWithCondition(final String condition, final String statement, final String column);
+    List<Product> getUniqueProductNames(final String typeName, final String sex);
 
     List<Product> groupByColumn(final String column);
 
     List<Product> getPopularBrands();
 
     List<Product> getProductsThatUserMayLike(final Product product);
+
+    List<Product> getProductsBySex(final List<Product> products, final String sex);
 
     void addProduct(final Product product);
 

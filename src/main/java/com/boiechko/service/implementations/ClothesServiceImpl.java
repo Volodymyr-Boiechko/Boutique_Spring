@@ -4,7 +4,6 @@ import com.boiechko.model.OrderDetails;
 import com.boiechko.model.Product;
 import com.boiechko.service.interfaces.ClothesService;
 import com.boiechko.service.interfaces.ProductService;
-import com.boiechko.utils.ProductsBySexUtil;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class ClothesServiceImpl implements ClothesService {
 
-    private final int NUMBER_OF_PRODUCTS_PER_PAGE = 3;
+    private final int NUMBER_OF_PRODUCTS_PER_PAGE = 9;
 
     private final ProductService productService;
 
@@ -57,7 +56,7 @@ public class ClothesServiceImpl implements ClothesService {
 
         }
 
-        return ProductsBySexUtil.getProductsBySex(clothes, sex);
+        return productService.getProductsBySex(clothes, sex);
 
     }
 

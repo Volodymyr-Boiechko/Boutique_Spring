@@ -24,15 +24,15 @@
 
                 <div class="allTypes__block">
 
-                    <c:if test="${sessionScope.sex == 'manClothes'}">
-                        <a href="${pageContext.request.contextPath}/clothes/manClothes/newestClothes?page=1">
+                    <c:if test="${sessionScope.sex == 'man'}">
+                        <a href="${pageContext.request.contextPath}/clothes/man/newestClothes?page=1">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/man/newest.jpg"
                                  alt="newest">
                         </a>
                     </c:if>
-                    <c:if test="${sessionScope.sex == 'womanClothes'}">
-                        <a href="${pageContext.request.contextPath}/clothes/womanClothes/newestClothes?page=1">
+                    <c:if test="${sessionScope.sex == 'woman'}">
+                        <a href="${pageContext.request.contextPath}/clothes/woman/newestClothes?page=1">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/woman/newest.jpg"
                                  alt="newest">
@@ -52,15 +52,15 @@
 
                 <div class="allTypes__block">
 
-                    <c:if test="${sessionScope.sex == 'manClothes'}">
-                        <a href="${pageContext.request.contextPath}/clothes/manClothes/clothes?page=1">
+                    <c:if test="${sessionScope.sex == 'man'}">
+                        <a href="${pageContext.request.contextPath}/clothes/man/clothes?page=1">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/man/clothes.png"
                                  alt="clothes">
                         </a>
                     </c:if>
-                    <c:if test="${sessionScope.sex == 'womanClothes'}">
-                        <a href="${pageContext.request.contextPath}/clothes/womanClothes/clothes?page=1">
+                    <c:if test="${sessionScope.sex == 'woman'}">
+                        <a href="${pageContext.request.contextPath}/clothes/woman/clothes?page=1">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/woman/clothes.jpg"
                                  alt="clothes">
@@ -80,15 +80,15 @@
 
                 <div class="allTypes__block">
 
-                    <c:if test="${sessionScope.sex == 'manClothes'}">
-                        <a href="${pageContext.request.contextPath}/clothes/manClothes/shoes?page=1">
+                    <c:if test="${sessionScope.sex == 'man'}">
+                        <a href="${pageContext.request.contextPath}/clothes/man/shoes?page=1">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/man/sneakers.jpg"
                                  alt="shoes">
                         </a>
                     </c:if>
-                    <c:if test="${sessionScope.sex == 'womanClothes'}">
-                        <a href="${pageContext.request.contextPath}/clothes/womanClothes/shoes?page=1">
+                    <c:if test="${sessionScope.sex == 'woman'}">
+                        <a href="${pageContext.request.contextPath}/clothes/woman/shoes?page=1">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/woman/sneakers.jpg"
                                  alt="shoes">
@@ -108,15 +108,15 @@
 
                 <div class="allTypes__block">
 
-                    <c:if test="${sessionScope.sex == 'manClothes'}">
-                        <a href="${pageContext.request.contextPath}/clothes/manClothes/accessories?page=1">
+                    <c:if test="${sessionScope.sex == 'man'}">
+                        <a href="${pageContext.request.contextPath}/clothes/man/accessories?page=1">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/man/accessories.jpg"
                                  alt="accessories">
                         </a>
                     </c:if>
-                    <c:if test="${sessionScope.sex == 'womanClothes'}">
-                        <a href="${pageContext.request.contextPath}/clothes/womanClothes/accessories?page=1">
+                    <c:if test="${sessionScope.sex == 'woman'}">
+                        <a href="${pageContext.request.contextPath}/clothes/woman/accessories?page=1">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/woman/accessories.jpg"
                                  alt="accessories">

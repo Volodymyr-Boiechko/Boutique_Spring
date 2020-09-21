@@ -1,7 +1,6 @@
 package com.boiechko.controller;
 
 import com.boiechko.service.interfaces.ProductService;
-import com.boiechko.utils.ProductsBySexUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,22 +27,18 @@ public class HeaderController {
 
         final String sex = (String) session.getAttribute("sex");
 
-        model.addAttribute("newestProducts", ProductsBySexUtil.getProductsBySex(
+        model.addAttribute("newestProducts", productService.getProductsBySex(
                 productService.getLatestAddedProducts().stream().limit(30).collect(Collectors.toList()), sex));
 
-        model.addAttribute("clothesTypes", ProductsBySexUtil.getProductsBySex(
-                productService.groupByColumnWithCondition("typeName", "Одяг", "productName"), sex));
+        model.addAttribute("clothesTypes", productService.getUniqueProductNames("Одяг", sex));
 
-        model.addAttribute("shoes", ProductsBySexUtil.getProductsBySex(
-                productService.groupByColumnWithCondition("typeName", "Взуття", "productName"), sex));
+        model.addAttribute("shoes", productService.getUniqueProductNames("Взуття", sex));
 
-        model.addAttribute("accessories", ProductsBySexUtil.getProductsBySex(
-                productService.groupByColumnWithCondition("typeName", "Аксесуари", "productName"), sex));
+        model.addAttribute("accessories", productService.getUniqueProductNames("Аксесуари", sex));
 
-        model.addAttribute("sportWear", ProductsBySexUtil.getProductsBySex(
-                productService.groupByColumnWithCondition("typeName", "Спортивний одяг", "productName"), sex));
+        model.addAttribute("sportWear", productService.getUniqueProductNames("Спортивний одяг", sex));
 
-        model.addAttribute("brands", ProductsBySexUtil.getProductsBySex(productService.getPopularBrands(), sex));
+        model.addAttribute("brands", productService.getProductsBySex(productService.getPopularBrands(), sex));
 
         return "components/header";
     }

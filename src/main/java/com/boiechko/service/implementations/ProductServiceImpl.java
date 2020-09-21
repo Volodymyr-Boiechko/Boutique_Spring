@@ -9,9 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,8 +39,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> groupByColumnWithCondition(final String condition, final String statement, final String column) {
-        return productDao.groupByColumnWithCondition(condition, statement, column);
+    public List<Product> getUniqueProductNames(final String typeName, final String sex) {
+
+        return productDao.getProductsByColumnInRandomOrder("typeName", typeName)
+                .stream()
+                .filter(product -> product.getSex().equals(getUkrainianSex(sex)))
+                .filter(distinctByKey(Product::getProductName))
+                .collect(Collectors.toList());
+
+    }
+
+    private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return product -> seen.add(keyExtractor.apply(product));
     }
 
     @Override
@@ -67,6 +79,16 @@ public class ProductServiceImpl implements ProductService {
                 .filter(element -> !element.equals(product))
                 .limit(4)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> getProductsBySex(final List<Product> products, final String sex) {
+
+        return products
+                .stream()
+                .filter(product -> product.getSex().equals(getUkrainianSex(sex)))
+                .collect(Collectors.toList());
+
     }
 
     @Override
@@ -141,11 +163,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String getUkrainianSex(final String englishSex) {
 
-        if (englishSex.equals("womanClothes")){
-            return "Жіночий одяг";
-        } else {
-            return "Чоловічий одяг";
-        }
+        return englishSex.equals("man") ? "Чоловічий одяг" : "Жіночий одяг";
 
     }
 

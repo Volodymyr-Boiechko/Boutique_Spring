@@ -18,7 +18,7 @@ public class MainInterceptor extends HandlerInterceptorAdapter {
         final HttpSession session = request.getSession();
 
         if (session.getAttribute("sex") == null) {
-            session.setAttribute("sex", "manClothes");
+            session.setAttribute("sex", "man");
         }
         if (session.getAttribute("idsOfProductsThatAreFavorite") == null){
             session.setAttribute("idsOfProductsThatAreFavorite", new ArrayList<>());
