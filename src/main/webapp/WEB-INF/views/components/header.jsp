@@ -24,12 +24,12 @@
 
                 <div class="header__gender">
 
-                    <a href="${pageContext.request.contextPath}/clothes/manClothes"
+                    <a id="manClothes" href="${pageContext.request.contextPath}/clothes/manClothes"
                        class="header__gender_element header__gender_left">
                         чоловіки
                     </a>
-                    <span>|</span>
-                    <a href="${pageContext.request.contextPath}/clothes/womanClothes" class="header__gender_element">
+                    <a id="womanCLothes" href="${pageContext.request.contextPath}/clothes/womanClothes"
+                       class="header__gender_element">
                         жінки
                     </a>
 
@@ -196,24 +196,21 @@
 
                             <li class="subheader__list__dropdown__list__elem">
 
-                                <ul class="subheader__list__dropdown__list__elem_images" style="margin-top: 40px;">
+                                <ul class="subheader__list__dropdown__list__elem_images"">
 
-                                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?page=1">
+                                    <c:forEach items="${clothesTypes}" var="product" end="1">
 
-                                        <img src="${pageContext.request.contextPath}/resources/img/header/man.jpg"
-                                             alt="photo"
-                                             style="opacity: 0.75;">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?productName=${product.productName}&page=1">
+                                            <img src="${pageContext.request.contextPath}/resources/${product.image}"
+                                                 alt="${product.productName}">
+                                            <p>${product.brand}</p>
+                                            <div class="hoverHeader"></div>
+                                        </a>
+                                    </c:forEach>
 
-                                    </a>
-
-                                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?page=1">
-
-                                        <img src="${pageContext.request.contextPath}/resources/img/header/man1.jpg"
-                                             alt="photo"
-                                             style="opacity: 0.75;">
-                                    </a>
                                 </ul>
                             </li>
+
                         </ul>
                     </div>
                 </li>
@@ -528,6 +525,21 @@
             overlay.classList.remove('overlayw');
         });
 
+    }
+
+    let sex = "${sessionScope.sex}";
+    let manClothes = document.querySelector("#manClothes");
+    let womanClothes = document.querySelector("#womanCLothes");
+
+    if (sex === "manClothes") {
+
+        manClothes.classList.add("active_gender");
+        womanClothes.classList.remove("active_gender");
+
+    } else if (sex === "womanClothes") {
+
+        womanClothes.classList.add("active_gender");
+        manClothes.classList.remove("active_gender");
     }
 
 </script>

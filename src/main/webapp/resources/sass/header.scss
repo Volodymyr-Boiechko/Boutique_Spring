@@ -6,12 +6,14 @@
 
   &__gender {
 
-    height: 40px;
-    margin-top: 15px;
-    padding: 12px;
+    height: 75px;
+    line-height: 75px;
+    display: flex;
 
     &_element {
 
+      text-align: center;
+      width: 50%;
       color: white;
       text-transform: uppercase;
 
@@ -26,12 +28,6 @@
       margin-left: 28px;
     }
 
-    span {
-      color: #a5a5a5;
-      height: 30px;
-      margin-left: 10px;
-      margin-right: 10px;
-    }
   }
 
   &__logo {
@@ -391,4 +387,10 @@
   top: 130px;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
+}
+.active_gender {
+  background-color: #525050;
+  &:hover {
+    color: white;
+  }
 }

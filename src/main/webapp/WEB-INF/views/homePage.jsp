@@ -24,10 +24,20 @@
 
                 <div class="allTypes__block">
 
-                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/newestClothes?page=1">
-                        <img class="allTypes__block_image"
-                             src="${pageContext.request.contextPath}/resources/img/homePage/newest.jpg" alt="shoes">
-                    </a>
+                    <c:if test="${sessionScope.sex == 'manClothes'}">
+                        <a href="${pageContext.request.contextPath}/clothes/manClothes/newestClothes?page=1">
+                            <img class="allTypes__block_image"
+                                 src="${pageContext.request.contextPath}/resources/img/homePage/man/newest.jpg"
+                                 alt="newest">
+                        </a>
+                    </c:if>
+                    <c:if test="${sessionScope.sex == 'womanClothes'}">
+                        <a href="${pageContext.request.contextPath}/clothes/womanClothes/newestClothes?page=1">
+                            <img class="allTypes__block_image"
+                                 src="${pageContext.request.contextPath}/resources/img/homePage/woman/newest.jpg"
+                                 alt="newest">
+                        </a>
+                    </c:if>
 
                     <div class="allTypes__block__text">
 
@@ -42,10 +52,20 @@
 
                 <div class="allTypes__block">
 
-                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?page=1">
-                        <img class="allTypes__block_image"
-                             src="${pageContext.request.contextPath}/resources/img/homePage/clothes.png" alt="clothes">
-                    </a>
+                    <c:if test="${sessionScope.sex == 'manClothes'}">
+                        <a href="${pageContext.request.contextPath}/clothes/manClothes/clothes?page=1">
+                            <img class="allTypes__block_image"
+                                 src="${pageContext.request.contextPath}/resources/img/homePage/man/clothes.png"
+                                 alt="clothes">
+                        </a>
+                    </c:if>
+                    <c:if test="${sessionScope.sex == 'womanClothes'}">
+                        <a href="${pageContext.request.contextPath}/clothes/womanClothes/clothes?page=1">
+                            <img class="allTypes__block_image"
+                                 src="${pageContext.request.contextPath}/resources/img/homePage/woman/clothes.jpg"
+                                 alt="clothes">
+                        </a>
+                    </c:if>
 
                     <div class="allTypes__block__text">
 
@@ -60,10 +80,20 @@
 
                 <div class="allTypes__block">
 
-                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?page=1">
-                        <img class="allTypes__block_image"
-                             src="${pageContext.request.contextPath}/resources/img/homePage/sneakers.jpg" alt="shoes">
-                    </a>
+                    <c:if test="${sessionScope.sex == 'manClothes'}">
+                        <a href="${pageContext.request.contextPath}/clothes/manClothes/shoes?page=1">
+                            <img class="allTypes__block_image"
+                                 src="${pageContext.request.contextPath}/resources/img/homePage/man/sneakers.jpg"
+                                 alt="shoes">
+                        </a>
+                    </c:if>
+                    <c:if test="${sessionScope.sex == 'womanClothes'}">
+                        <a href="${pageContext.request.contextPath}/clothes/womanClothes/shoes?page=1">
+                            <img class="allTypes__block_image"
+                                 src="${pageContext.request.contextPath}/resources/img/homePage/woman/sneakers.jpg"
+                                 alt="shoes">
+                        </a>
+                    </c:if>
 
                     <div class="allTypes__block__text">
 
@@ -78,11 +108,20 @@
 
                 <div class="allTypes__block">
 
-                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?page=1">
-                        <img class="allTypes__block_image"
-                             src="${pageContext.request.contextPath}/resources/img/homePage/accessories.jpg"
-                             alt="shoes">
-                    </a>
+                    <c:if test="${sessionScope.sex == 'manClothes'}">
+                        <a href="${pageContext.request.contextPath}/clothes/manClothes/accessories?page=1">
+                            <img class="allTypes__block_image"
+                                 src="${pageContext.request.contextPath}/resources/img/homePage/man/accessories.jpg"
+                                 alt="accessories">
+                        </a>
+                    </c:if>
+                    <c:if test="${sessionScope.sex == 'womanClothes'}">
+                        <a href="${pageContext.request.contextPath}/clothes/womanClothes/accessories?page=1">
+                            <img class="allTypes__block_image"
+                                 src="${pageContext.request.contextPath}/resources/img/homePage/woman/accessories.jpg"
+                                 alt="accessories">
+                        </a>
+                    </c:if>
 
                     <div class="allTypes__block__text">
 

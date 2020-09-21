@@ -210,9 +210,14 @@
 
         });
 
-        let typeName = "${sessionScope.clothes.get(0).typeName}";
-        let productName = "${sessionScope.clothes.get(0).productName}";
-        let sex = "${sessionScope.clothes.get(0).sex}";
+        let typeName, productName, sex;
+
+        <c:if test="${sessionScope.clothes.size() != 0}">
+            typeName = "${sessionScope.clothes.get(0).typeName}";
+            productName = "${sessionScope.clothes.get(0).productName}";
+            sex = "${sessionScope.clothes.get(0).sex}";
+        </c:if>
+
 
         document.getElementById("modalAddClothes").innerHTML =
             "<div class=\"overlay\" id=\"addOverlay\">\n" +

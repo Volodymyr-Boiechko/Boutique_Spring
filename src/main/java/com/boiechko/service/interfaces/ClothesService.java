@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface ClothesService {
 
-    List<Product> getListOfClothes(final HttpServletRequest request);
+    List<Product> getListOfClothes(final HttpServletRequest request, final String sex);
 
     int getNumberOfProductsShownOnPage(final int page, final int clothesSize);
 

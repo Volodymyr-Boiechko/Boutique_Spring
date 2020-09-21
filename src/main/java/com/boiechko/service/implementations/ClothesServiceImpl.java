@@ -4,6 +4,7 @@ import com.boiechko.model.OrderDetails;
 import com.boiechko.model.Product;
 import com.boiechko.service.interfaces.ClothesService;
 import com.boiechko.service.interfaces.ProductService;
+import com.boiechko.utils.ProductsBySexUtil;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class ClothesServiceImpl implements ClothesService {
     }
 
     @Override
-    public List<Product> getListOfClothes(final HttpServletRequest request) {
+    public List<Product> getListOfClothes(final HttpServletRequest request, final String sex) {
 
         final String[] urlPages = request.getRequestURI().split("/");
 
@@ -56,7 +57,7 @@ public class ClothesServiceImpl implements ClothesService {
 
         }
 
-        return clothes;
+        return ProductsBySexUtil.getProductsBySex(clothes, sex);
 
     }
 

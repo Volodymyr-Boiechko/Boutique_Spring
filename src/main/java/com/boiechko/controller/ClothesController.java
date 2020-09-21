@@ -44,7 +44,7 @@ public class ClothesController {
 
         session.setAttribute("sex", sex);
 
-        return "homePage";
+        return "redirect:/homePage";
     }
 
     @GetMapping("/{sex}/{typeName}")
@@ -65,7 +65,7 @@ public class ClothesController {
         }
 
         if (page == 1) {
-            session.setAttribute("clothes", clothesService.getListOfClothes(attributes.getRequest()));
+            session.setAttribute("clothes", clothesService.getListOfClothes(attributes.getRequest(), sex));
         }
 
         final List<Product> clothes = (List<Product>) session.getAttribute("clothes");

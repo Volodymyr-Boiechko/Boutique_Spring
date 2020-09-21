@@ -21,13 +21,13 @@
 
         <a class="path__info" href="${pageContext.request.contextPath}/">Головна сторінка</a>
         <div class="path_divider">›</div>
-        <div class="path__info">${pathToProduct.get(0)}</div>
+        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}" class="path__info">${pathToProduct.get(0)}</a>
         <div class="path_divider">›</div>
         <a class="path__info"
-           href="${pageContext.request.contextPath}/manClothes/${pathToProduct.get(1)}?page=1">${product.typeName}</a>
+           href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/${pathToProduct.get(1)}?page=1">${product.typeName}</a>
         <div class="path_divider">›</div>
         <a class="path__info"
-           href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?productName=${product.productName}&page=1">${product.productName}</a>
+           href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/${pathToProduct.get(1)}?productName=${product.productName}&page=1">${product.productName}</a>
         <div class="path_divider">›</div>
         <div class="path__info">${product.description}</div>
 

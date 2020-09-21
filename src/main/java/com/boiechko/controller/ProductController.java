@@ -2,6 +2,7 @@ package com.boiechko.controller;
 
 import com.boiechko.model.Product;
 import com.boiechko.service.interfaces.ProductService;
+import com.boiechko.utils.ProductsBySexUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +26,13 @@ public class ProductController {
                                 @PathVariable("idProduct") final int idProduct,
                                 final Model model) {
 
-
         final Product product = productService.getProductById(idProduct);
 
         model.addAttribute("product", product);
-        model.addAttribute("productsThatUserMayLike", productService.getProductsThatUserMayLike(product));
+        model.addAttribute("productsThatUserMayLike",
+                ProductsBySexUtil.getProductsBySex(productService.getProductsThatUserMayLike(product), sex));
         model.addAttribute("pathToProduct", Arrays.asList(productService.getUkrainianSex(sex),
-                productService.getUkrainianTypeName(product.getTypeName())));
+                productService.getEnglishTypeName(product.getTypeName())));
 
         return "product";
 
