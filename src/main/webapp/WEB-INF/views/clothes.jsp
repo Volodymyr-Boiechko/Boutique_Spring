@@ -53,6 +53,8 @@
 
         </div>
 
+        <jsp:include page="/clothesFilter"/>
+
         <div class="clothes">
 
             <div class="container">
