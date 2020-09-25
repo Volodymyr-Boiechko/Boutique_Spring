@@ -38,7 +38,7 @@ public class HeaderController {
 
         model.addAttribute("sportWear", productService.getUniqueProductNames("Спортивний одяг", sex));
 
-        model.addAttribute("brands", productService.getProductsBySex(productService.getPopularBrands(), sex));
+        model.addAttribute("brands", productService.getProductsBySex(productService.getUniqueNamesOfPopularBrands(), sex));
 
         return "components/header";
     }

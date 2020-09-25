@@ -6,7 +6,6 @@ import com.boiechko.service.interfaces.ClothesService;
 import com.boiechko.service.interfaces.ProductService;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -24,20 +23,17 @@ public class ClothesServiceImpl implements ClothesService {
     }
 
     @Override
-    public List<Product> getListOfClothes(final HttpServletRequest request, final String sex) {
-
-        final String[] urlPages = request.getRequestURI().split("/");
+    public List<Product> getListOfClothes(final String typeName, final String productName, final String sex) {
 
         List<Product> clothes;
 
-        switch (urlPages[3]) {
+        switch (typeName) {
             case "clothes":
             case "shoes":
             case "accessories":
             case "sportWear": {
 
-                final String productName = request.getParameter("productName");
-                clothes = getClothes(productName, urlPages[3]);
+                clothes = getClothes(typeName, productName);
                 break;
             }
             case "newestClothes": {
@@ -47,8 +43,7 @@ public class ClothesServiceImpl implements ClothesService {
             }
             case "brands": {
 
-                final String brand = request.getParameter("brand");
-                clothes = productService.getProductsByColumnInRandomOrder("brand", brand);
+                clothes = productService.getPopularBrands();
                 break;
             }
             default:
@@ -94,9 +89,9 @@ public class ClothesServiceImpl implements ClothesService {
 
     public void updateOrderDetailsInProducts(final Set<Product> products, final List<OrderDetails> orderDetails) {
 
-        for (Product product: products) {
+        for (Product product : products) {
 
-            for (OrderDetails orderDetail: orderDetails) {
+            for (OrderDetails orderDetail : orderDetails) {
 
                 if (product.getIdProduct() == orderDetail.getIdProduct()) {
                     product.setQuantity(orderDetail.getQuantity());
@@ -108,7 +103,7 @@ public class ClothesServiceImpl implements ClothesService {
 
     }
 
-    private List<Product> getClothes(final String productName, final String typeName) {
+    private List<Product> getClothes(final String typeName, final String productName) {
 
         if (productName == null) {
             return productService.getProductsByColumnInRandomOrder("typeName", productService.getUkrainianTypeName(typeName));

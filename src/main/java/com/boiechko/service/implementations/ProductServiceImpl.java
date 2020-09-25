@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
-        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        final Set<Object> seen = ConcurrentHashMap.newKeySet();
         return product -> seen.add(keyExtractor.apply(product));
     }
 
@@ -60,9 +60,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getPopularBrands() {
+    public List<Product> getUniqueNamesOfPopularBrands() {
 
-        return groupByColumn("brand").stream()
+        return productDao.groupByColumn("brand")
+                .stream()
                 .map(Product::getBrand)
                 .map(brand -> getProductsByColumnInRandomOrder("brand", brand))
                 .filter(products -> products.size() >= 10)
@@ -70,6 +71,17 @@ public class ProductServiceImpl implements ProductService {
                 .sorted(Comparator.comparing(Product::getBrand))
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public List<Product> getPopularBrands() {
+        return productDao.groupByColumn("brand")
+                .stream()
+                .map(Product::getBrand)
+                .map(brand -> productDao.getProductsByColumnInRandomOrder("brand", brand))
+                .filter(products -> products.size() >= 10)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -179,6 +191,10 @@ public class ProductServiceImpl implements ProductService {
                 return "Аксесуари";
             case "sportWear":
                 return "Спортивний одяг";
+            case "newestClothes":
+                return "Новинки";
+            case "brands":
+                return "Популярні бренди";
             default:
                 return null;
 
@@ -202,5 +218,12 @@ public class ProductServiceImpl implements ProductService {
                 return null;
 
         }
+    }
+
+    @Override
+    public String getPathToPage(final String typeName, final String productName) {
+
+        return productName == null ? getUkrainianTypeName(typeName) : productName;
+
     }
 }

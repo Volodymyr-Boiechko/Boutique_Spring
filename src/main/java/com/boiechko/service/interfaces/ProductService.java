@@ -15,6 +15,8 @@ public interface ProductService {
 
     List<Product> groupByColumn(final String column);
 
+    List<Product> getUniqueNamesOfPopularBrands();
+
     List<Product> getPopularBrands();
 
     List<Product> getProductsThatUserMayLike(final Product product);
@@ -40,5 +42,7 @@ public interface ProductService {
     String getUkrainianTypeName(final String englishTypeName);
 
     String getEnglishTypeName(final String ukrainianTypeName);
+
+    String getPathToPage(final String typeName, final String productName);
 
 }

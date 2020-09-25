@@ -3,13 +3,12 @@ package com.boiechko.service.interfaces;
 import com.boiechko.model.OrderDetails;
 import com.boiechko.model.Product;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Set;
 
 public interface ClothesService {
 
-    List<Product> getListOfClothes(final HttpServletRequest request, final String sex);
+    List<Product> getListOfClothes(final String typeName, final String productName, final String sex);
 
     int getNumberOfProductsShownOnPage(final int page, final int clothesSize);
 

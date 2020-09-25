@@ -51,30 +51,29 @@ public class ClothesController {
     public String onClothes(@PathVariable("sex") final String sex,
                             @PathVariable("typeName") final String typeName,
                             @RequestParam(name = "page", defaultValue = "1") final int page,
+                            @RequestParam(name = "productName", required = false) final String productName,
                             final Model model) {
 
         final ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         final HttpSession session = attributes.getRequest().getSession();
 
         final User user = (User) session.getAttribute("user");
-
-        if (userService.isUserAdmin(user)) {
-            model.addAttribute("isUserCanAddClothes", true);
-        } else {
-            model.addAttribute("isUserCanAddClothes", false);
-        }
+        final boolean isUserCanAddClothes = userService.isUserAdmin(user);
 
         if (page == 1) {
-            session.setAttribute("clothes", clothesService.getListOfClothes(attributes.getRequest(), sex));
+            session.setAttribute("clothes", clothesService.getListOfClothes(typeName, productName, sex));
         }
 
         final List<Product> clothes = (List<Product>) session.getAttribute("clothes");
 
         final int numberOfProductsShownOnPage = clothesService.getNumberOfProductsShownOnPage(page, clothes.size());
 
+        model.addAttribute("isUserCanAddClothes", isUserCanAddClothes);
         model.addAttribute("numberOfProductsShownOnPage", numberOfProductsShownOnPage);
-        model.addAttribute("lastIndexOfShownProduct", numberOfProductsShownOnPage - 1);
         model.addAttribute("pageNumber", page);
+
+        model.addAttribute("sex", productService.getUkrainianSex(sex));
+        model.addAttribute("productName", productService.getPathToPage(typeName, productName));
 
         return "clothes";
     }

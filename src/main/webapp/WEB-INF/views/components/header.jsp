@@ -24,11 +24,11 @@
 
                 <div class="header__gender">
 
-                    <a id="manClothes" href="${pageContext.request.contextPath}/clothes/manClothes"
+                    <a id="man" href="${pageContext.request.contextPath}/clothes/man"
                        class="header__gender_element header__gender_left">
                         чоловіки
                     </a>
-                    <a id="womanCLothes" href="${pageContext.request.contextPath}/clothes/womanClothes"
+                    <a id="woman" href="${pageContext.request.contextPath}/clothes/woman"
                        class="header__gender_element">
                         жінки
                     </a>
@@ -429,6 +429,12 @@
                                 <ol class="subheader__list__dropdown__list__elem_links subheader__list__dropdown__list__elem_links_columns"
                                     style="column-count: 3;">
 
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?page=1">
+                                            Дивитись все
+                                        </a>
+                                    </li>
+
                                     <c:forEach items="${brands}" var="product">
 
                                         <li>
@@ -528,18 +534,18 @@
     }
 
     let sex = "${sessionScope.sex}";
-    let manClothes = document.querySelector("#manClothes");
-    let womanClothes = document.querySelector("#womanCLothes");
+    let man = document.querySelector("#man");
+    let woman = document.querySelector("#woman");
 
-    if (sex === "manClothes") {
+    if (sex === "man") {
 
-        manClothes.classList.add("active_gender");
-        womanClothes.classList.remove("active_gender");
+        man.classList.add("active_gender");
+        woman.classList.remove("active_gender");
 
-    } else if (sex === "womanClothes") {
+    } else if (sex === "woman") {
 
-        womanClothes.classList.add("active_gender");
-        manClothes.classList.remove("active_gender");
+        woman.classList.add("active_gender");
+        man.classList.remove("active_gender");
     }
 
 </script>

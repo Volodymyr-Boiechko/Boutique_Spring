@@ -30,6 +30,29 @@
     </c:when>
     <c:otherwise>
 
+        <div class="pathBlock">
+
+            <div class="container">
+
+                <div class="pathBlock__productPath">
+
+                    <a class="pathBlock__productPath__info" href="${pageContext.request.contextPath}/">
+                        Головна сторінка
+                    </a>
+                    <div class="pathBlock__productPath_divider">›</div>
+                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}"
+                       class="pathBlock__productPath__info">
+                            ${sex}
+                    </a>
+                    <div class="pathBlock__productPath_divider">›</div>
+                    <div class="pathBlock__productPath__info">${productName}</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
         <div class="clothes">
 
             <div class="container">
@@ -38,7 +61,7 @@
 
                     <div class="row">
 
-                        <c:forEach items="${sessionScope.clothes}" begin="0" end="${lastIndexOfShownProduct}"
+                        <c:forEach items="${sessionScope.clothes}" begin="0" end="${numberOfProductsShownOnPage - 1}"
                                    var="product">
 
                             <div class="block col-md-4" id="${product.idProduct}">
@@ -144,6 +167,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/plugins/MultipleSelect.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/plugins/PluginForMultipleSelect.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/addToFavorite.js"></script>
 <script charset="utf-8">
 
@@ -213,9 +238,9 @@
         let typeName, productName, sex;
 
         <c:if test="${sessionScope.clothes.size() != 0}">
-            typeName = "${sessionScope.clothes.get(0).typeName}";
-            productName = "${sessionScope.clothes.get(0).productName}";
-            sex = "${sessionScope.clothes.get(0).sex}";
+        typeName = "${sessionScope.clothes.get(0).typeName}";
+        productName = "${sessionScope.clothes.get(0).productName}";
+        sex = "${sessionScope.clothes.get(0).sex}";
         </c:if>
 
 
