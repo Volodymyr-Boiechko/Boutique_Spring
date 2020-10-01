@@ -200,7 +200,6 @@
 
     });
 
-
     function filterData(selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice) {
 
         $.ajax({
@@ -216,6 +215,10 @@
                 minPrice: minPrice,
                 maxPrice: maxPrice
             }
+        }).done(function (data) {
+
+            addHtmlProducts(data, ${not empty sessionScope.user && sessionScope.admin != false});
+
         });
     }
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @Transactional
@@ -21,10 +22,10 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Product> getProductsByColumnInRandomOrder(final String column, final String credentials) {
+    public List<Product> getProductsByColumn(final String column, final String credentials) {
 
         Query<Product> query = sessionFactory.getCurrentSession()
-                .createQuery("FROM Product WHERE " + column + "=?1 order by RAND()")
+                .createQuery("FROM Product WHERE " + column + "=?1")
                 .setParameter(1, credentials);
 
         return query.list();
@@ -37,6 +38,51 @@ public class ProductDaoImpl implements ProductDao {
 
         Query<Product> query = sessionFactory.getCurrentSession()
                 .createQuery("FROM Product ORDER BY idProduct DESC");
+
+        return query.list().stream().limit(30).collect(Collectors.toList());
+
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Product> getProductsWithFilters(final String typeName, final String productName, final String sex,
+                                                final String[] selectedBrands, final String[] selectedColors,
+                                                final String[] selectedSizes, final int minPrice, final int maxPrice) {
+
+        String queryString = "FROM Product product WHERE typeName=?1 AND sex=?2 AND price >=?3 AND price <=?4";
+
+        if (productName != null) {
+            queryString += " AND product.productName = '" + productName + "'";
+        }
+
+        if (selectedBrands != null) {
+            queryString += " AND brand IN (:brands)";
+        }
+
+        if (selectedColors != null) {
+            queryString += " AND color IN (:colors)";
+        }
+
+        if (selectedSizes != null) {
+            queryString += " AND product.size IN (:sizes)";
+        }
+
+        final Query<Product> query = sessionFactory.getCurrentSession()
+                .createQuery(queryString)
+                .setParameter(1, typeName)
+                .setParameter(2, sex)
+                .setParameter(3, minPrice)
+                .setParameter(4, maxPrice);
+
+        if (selectedBrands != null) {
+            query.setParameterList("brands", selectedBrands);
+        }
+        if (selectedColors != null) {
+            query.setParameterList("colors", selectedColors);
+        }
+        if (selectedSizes != null) {
+            query.setParameterList("sizes", selectedSizes);
+        }
 
         return query.list();
 
@@ -52,6 +98,7 @@ public class ProductDaoImpl implements ProductDao {
         return query.list();
 
     }
+
 
     @Override
     @SuppressWarnings("unchecked")

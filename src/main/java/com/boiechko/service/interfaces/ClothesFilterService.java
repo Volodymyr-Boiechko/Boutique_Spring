@@ -12,4 +12,13 @@ public interface ClothesFilterService {
 
     List<String> getAllModelsOfClothes(final List<Product> clothes);
 
+    List<Product> getProductsWithFilters(final String typeName, final String productName, final String sex,
+                                          final String[] selectedBrands,
+                                          final String[] selectedColors,
+                                          final String[] selectedSizes, final int minPrice, final int maxPrice);
+
+    int getMinPriceOfClothes(final List<Product> clothes);
+
+    int getMaxPriceOfClothes(final List<Product> clothes);
+
 }

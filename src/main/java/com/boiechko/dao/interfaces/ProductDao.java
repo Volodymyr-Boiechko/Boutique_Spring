@@ -6,10 +6,14 @@ import java.util.List;
 
 public interface ProductDao extends Dao<Product> {
 
-    List<Product> getProductsByColumnInRandomOrder(final String column, final String credentials);
+    List<Product> getProductsByColumn(final String column, final String credentials);
 
     List<Product> getLatestAddedProducts();
 
     List<Product> groupByColumn(final String column);
+
+    List<Product> getProductsWithFilters(final String typeName, final String productName, final String sex,
+                                         final String[] selectedBrands, final String[] selectedColors,
+                                         final String[] selectedSizes, final int minPrice, final int maxPrice);
 
 }

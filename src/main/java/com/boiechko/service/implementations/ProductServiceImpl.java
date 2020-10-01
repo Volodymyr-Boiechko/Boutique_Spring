@@ -29,8 +29,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsByColumnInRandomOrder(final String column, final String credentials) {
-        return productDao.getProductsByColumnInRandomOrder(column, credentials);
+    public List<Product> getProductsByColumn(final String column, final String credentials) {
+        return productDao.getProductsByColumn(column, credentials);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getUniqueProductNames(final String typeName, final String sex) {
 
-        return productDao.getProductsByColumnInRandomOrder("typeName", typeName)
+        return productDao.getProductsByColumn("typeName", typeName)
                 .stream()
                 .filter(product -> product.getSex().equals(getUkrainianSex(sex)))
                 .filter(distinctByKey(Product::getProductName))
@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
         return productDao.groupByColumn("brand")
                 .stream()
                 .map(Product::getBrand)
-                .map(brand -> getProductsByColumnInRandomOrder("brand", brand))
+                .map(brand -> getProductsByColumn("brand", brand))
                 .filter(products -> products.size() >= 10)
                 .map(products -> products.get(0))
                 .sorted(Comparator.comparing(Product::getBrand))
@@ -78,7 +78,7 @@ public class ProductServiceImpl implements ProductService {
         return productDao.groupByColumn("brand")
                 .stream()
                 .map(Product::getBrand)
-                .map(brand -> productDao.getProductsByColumnInRandomOrder("brand", brand))
+                .map(brand -> productDao.getProductsByColumn("brand", brand))
                 .filter(products -> products.size() >= 10)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getProductsThatUserMayLike(final Product product) {
-        return productDao.getProductsByColumnInRandomOrder("productName", product.getProductName())
+        return productDao.getProductsByColumn("productName", product.getProductName())
                 .stream()
                 .filter(element -> !element.equals(product))
                 .limit(4)

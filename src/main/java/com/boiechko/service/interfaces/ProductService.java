@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProductsByColumnInRandomOrder(final String column, final String credentials);
+    List<Product> getProductsByColumn(final String column, final String credentials);
 
     List<Product> getLatestAddedProducts();
 
