@@ -116,7 +116,7 @@
 
                 <div class="footer__bottom_brand">© 2020 Boutique</div>
                 <a class="footer__bottom_link" href="#">Політика використання Cookies</a>
-                <a class="footer__bottom_link left" href="#">Політика конфіденційності</a>
+                <a class="footer__bottom_link leftFooter" href="#">Політика конфіденційності</a>
 
             </div>
 

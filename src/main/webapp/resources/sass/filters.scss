@@ -20,8 +20,10 @@
 //li of filter
 .filter {
   margin-top: 20px;
-  width: 200px;
+  width: 20%;
+  margin-right: 5%;
   position: relative;
+  outline: none;
 }
 
 //button
@@ -41,6 +43,7 @@
   border-right: none;
   border-left: none;
   background-color: rgba(0, 0, 0, 0);
+  outline: none;
 
   &__text {
     padding: 6px 22px 6px 8px;
@@ -74,12 +77,14 @@
   box-sizing: border-box;
   background-color: #eee;
   top: 43px;
+  min-height: 120px;
   padding: 0;
   z-index: 2;
 }
 
 .headerFilter {
 
+  display: block;
   position: relative;
   background-color: #f8f8f8;
   border-bottom: 1px solid #ddd;
@@ -87,13 +92,21 @@
   padding: 5px 5px 5px 15px;
   min-height: 50px;
   margin: 0;
-  display: flex;
 
   &__text {
     font-size: 15px;
     line-height: 50px;
     font-weight: 400;
     margin: 0;
+  }
+
+  &__prices {
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #999;
+    white-space: nowrap;
+    margin-top: -8px;
   }
 
   &__button {
@@ -116,10 +129,125 @@
 
 }
 
+#minPriceHeader, #maxPriceHeader {
+  display: inline-block;
+}
+
+.prices {
+  margin-top: 15px;
+  width: 100%;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: .5px;
+
+  &__min {
+    display: inline-block;
+  }
+
+  &__max {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+}
+
+.multi-range-slider {
+  padding-top: 20px;
+}
+
+.middle {
+  position: relative;
+  max-width: 500px;
+  padding: 0 20px 35px 20px;
+}
+
+.slider {
+  position: relative;
+  z-index: 1;
+  height: 10px;
+  margin: 0 15px;
+}
+
+.slider > .track {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #dfdfdf;
+}
+
+.slider > .range {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background: #9b9b9b;
+}
+
+.slider > .thumb {
+  position: absolute;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  background-color: black;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(169, 169, 169, 0.1);
+  transition: box-shadow .3s ease-in-out;
+}
+
+.slider > .thumb.left {
+  left: 25%;
+  transform: translate(-15px, -10px);
+}
+
+.slider > .thumb.right {
+  right: 25%;
+  transform: translate(15px, -10px);
+}
+
+.slider > .thumb.hover {
+  box-shadow: 0 0 0 10px rgba(169, 169, 169, 0.1);
+}
+
+.slider > .thumb.active {
+  box-shadow: 0 0 0 20px rgba(169, 169, 169, 0.2);
+}
+
+input[type=range] {
+  position: absolute;
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 2;
+  height: 10px;
+  width: 100%;
+  opacity: 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  pointer-events: all;
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+  background-color: red;
+  -webkit-appearance: none;
+}
+#input-left {
+  margin-left: 15px;
+}
+#input-right {
+  padding-right: 35px;
+}
+
 .search {
 
   width: 100%;
-  padding: 10px 27px 10px 10px;
+  padding: 10px 15px 10px 10px;
   color: grey;
   font-weight: 400;
   font-size: 16px;
@@ -210,6 +338,7 @@
 
   border-top: 2px solid #0770cf;
   color: #0770cf;
+
   &:after {
     color: #0770cf;
   }

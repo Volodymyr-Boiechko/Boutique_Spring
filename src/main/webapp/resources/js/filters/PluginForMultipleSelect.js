@@ -85,12 +85,4 @@ $.fn.loadData = function (e) {
         status: !0,
         obj: i.IsReturnSingleValue ? s[0] : s
     })
-}, $.fn.isSelected = function (e) {
-
-    $.extend({}, e);
-    return $(this).siblings(".dropdown-content")
-        .find(".list")
-        .find(".list__el")
-        .hasClass('selected');
-
 };

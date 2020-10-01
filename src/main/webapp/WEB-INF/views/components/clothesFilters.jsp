@@ -25,111 +25,199 @@
             <select id="brands"></select>
             <select id="colors"></select>
 
+
+            <li class="filter">
+                <button class="dropdownButton dropdownButton__prices">
+                    <div class="dropdownButton__text">Ціна</div>
+                </button>
+                <div class="dropdown-content hidden">
+                    <div class="headerFilter">
+                        <div class="headerFilter__text" id="headerMin">Вибраний ціновий діапазон</div>
+                        <div class="headerFilter__prices">
+                            <div id="minPriceHeader">${minPrice} грн</div>
+                            -
+                            <div id="maxPriceHeader">${maxPrice} грн</div>
+                        </div>
+                        <button class="headerFilter__button" id="resetPrices">Очистити</button>
+                    </div>
+                    <div class="middle">
+                        <div class="prices">
+                            <div class="prices__min" id="minPrice">${minPrice} грн</div>
+                            <div class="prices__max" id="maxPrice">${maxPrice} грн</div>
+                        </div>
+                        <div class="multi-range-slider">
+                            <input type="range" id="input-left" min="${minPrice}" max="${maxPrice}" value="${minPrice}">
+                            <input type="range" id="input-right" min="${minPrice}" max="${maxPrice}"
+                                   value="${maxPrice}">
+
+                            <div class="slider">
+                                <div class="track"></div>
+                                <div class="range"></div>
+                                <div class="thumb left"></div>
+                                <div class="thumb right"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul>
 
     </div>
 
 </section>
+<script src="${pageContext.request.contextPath}/resources/js/filters/LoadAndGetDataFromSelect.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/filters/slider.js"></script>
 <script>
 
+    //created arrays and create multi select
     $(document).ready(function () {
 
-        let brands = [];
         let idBrand = 1;
-        <c:forEach items="${brands}" var="brand">
-        brands.push({
-            id: idBrand++,
-            brand: "${brand}"
-        });
-        </c:forEach>
+        let brands = [
+            <c:forEach items="${brands}" var="brand">
+            {id: idBrand++, brand: "${brand}"},
+            </c:forEach>
+        ];
 
-        $("#brands").loadData({
-            List: brands,
-            DisplayText: "brand",
-            OtherProperties: "id,brand",
-            PrimaryKey: "id",
-            ButtonName: "Бренди"
-        });
+        loadData("brands", brands, "brand", "Бренди");
 
-        $("#load").click(function () {
-
-            console.clear();
-
-            $("#brands").getSelectedValues({
-                PrimaryKey: "id",
-                DataValue: "brand",  //Display Property name
-                ReturnProperties: "id,brand",
-                IsReturnSingleValue: false
-            }, function (response) {
-                if (response.status && response.obj != null) {
-                    let selectedItemList = response.obj;
-                    for (let i = 0; selectedItemList.length; i++) {
-                        console.log(selectedItemList[i].brand);
-                    }
-                }
-            });
-
-        });
-
-        let colors = [];
         let idColor = 1;
-        <c:forEach items="${colors}" var="color" begin="1">
-        colors.push({
-            id: idColor++,
-            color: "${color}"
-        });
-        </c:forEach>
+        let colors = [
+            <c:forEach items="${colors}" var="color">
+            <c:if test="${color != ''}">
+            {id: idColor++, color: "${color}"},
+            </c:if>
+            </c:forEach>
+        ];
 
-        $("#colors").loadData({
+        loadData("colors", colors, "color", "Колір");
 
-            List: colors,
-            DisplayText: "color",
-            OtherProperties: "id,color",
-            PrimaryKey: "id",
-            ButtonName: "Колір"
-
-        });
-
-        let sizes = [];
         let idSize = 1;
-        <c:forEach items="${sizes}" var="size">
-        sizes.push({
-            id: idSize++,
-            size: "${size}"
-        })
-        </c:forEach>
+        let sizes = [
+            <c:forEach items="${sizes}" var="size">
+            {id: idSize++, size: "${size}"},
+            </c:forEach>
+        ];
 
-        $("#sizes").loadData({
-            List: sizes,
-            DisplayText: "size",
-            OtherProperties: "id,size",
-            PrimaryKey: "id",
-            ButtonName: "Розмір"
-        });
+        loadData("sizes", sizes, "size", "Розмір");
 
         let sort = [{id: 1, name: "Новинки"}, {id: 2, name: "Сортувати за зростанням"},
             {id: 3, name: "Сортувати за спаданням"}];
 
-        $("#sort").loadData({
-            List: sort,
-            DisplayText: "name",
-            OtherProperties: "id,name",
-            PrimaryKey: "id",
-            ButtonName: "Сортувати"
-        });
+        loadData("sort", sort, "name", "Сортувати");
 
-        setInterval(function (e) {
+        // if user selected filter
+        $(".list__el").on('click', function (e) {
 
-            console.clear();
+            let list__el = $(this);
 
-            if ($("#brands").isSelected() || $("#colors").isSelected() || $("#sizes").isSelected() || $("#sort").isSelected()) {
-                console.log('selected');
+            if (list__el.hasClass('selected') === false) {
+                list__el.toggleClass('selected');
+            } else {
+                list__el.removeClass('selected');
             }
 
-        }, 1500);
+            let selectedBrands = getSelectedBrands(null);
+            let selectedColors = getSelectedColors(null);
+            let selectedSizes = getSelectedSizes(null);
+            let minPrice = getLeftValue();
+            let maxPrice = getRightValue();
+
+            filterData(selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
+
+        });
+
+        $(".headerFilter__button").on('click', function (e) {
+
+            let $wrap = $(this).closest('.filter');
+            let filter = $wrap.find('select').attr("id");
+
+            let selectedBrands = getSelectedBrands(filter);
+            let selectedColors = getSelectedColors(filter);
+            let selectedSizes = getSelectedSizes(filter);
+            let minPrice = getLeftValue();
+            let maxPrice = getRightValue();
+
+            filterData(selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
+
+        });
 
     });
 
+    //if user moved slider
+    $("#input-left, #input-right").on('input change', function () {
+
+        $(".dropdownButton__prices").attr('style', "border-top: 2px solid #0770cf");
+
+        let minPrice = ${minPrice};
+        let maxPrice = ${maxPrice};
+
+        let minPriceSelected = getLeftValue();
+        let maxPriceSelected = getRightValue();
+
+        if (minPrice === parseInt(minPriceSelected) && maxPrice === parseInt(maxPriceSelected)) {
+            $(".dropdownButton__prices").removeAttr('style');
+        }
+
+        let selectedBrands = getSelectedBrands(null);
+        let selectedColors = getSelectedColors(null);
+        let selectedSizes = getSelectedSizes(null);
+
+        filterData(selectedBrands, selectedColors, selectedSizes, minPriceSelected, maxPriceSelected);
+
+    });
+
+    //reset slider values
+    $("#resetPrices").on('click', function () {
+        document.getElementById('minPrice').innerHTML = ${minPrice} + " грн";
+        document.getElementById('minPriceHeader').innerHTML = ${minPrice} + " грн";
+        document.getElementById('maxPrice').innerHTML = ${maxPrice} + " грн";
+        document.getElementById('maxPriceHeader').innerHTML = ${maxPrice} + " грн";
+
+        let inputLeft = document.getElementById('input-left');
+        let inputRight = document.getElementById('input-right');
+
+        let thumbLeft = document.querySelector('.slider > .thumb.left');
+        let thumbRight = document.querySelector('.slider > .thumb.right');
+        let range = document.querySelector('.slider > .range');
+
+        thumbLeft.style.left = "0%";
+        thumbRight.style.right = "0%"
+        range.style.left = "0%";
+        range.style.right = "0%";
+
+        inputLeft.value = ${minPrice};
+        inputRight.value = ${maxPrice};
+
+        $(".dropdownButton__prices").removeAttr('style');
+
+        let selectedBrands = getSelectedBrands(null);
+        let selectedColors = getSelectedColors(null);
+        let selectedSizes = getSelectedSizes(null);
+
+        filterData(selectedBrands, selectedColors, selectedSizes, ${minPrice}, ${minPrice});
+
+    });
+
+
+    function filterData(selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice) {
+
+        $.ajax({
+            url: '/filterClothes',
+            type: 'GET',
+            async: true,
+            contentType: 'application/json; charset=UTF-8',
+            datatype: "JSON",
+            data: {
+                selectedBrands: selectedBrands,
+                selectedColors: selectedColors,
+                selectedSizes: selectedSizes,
+                minPrice: minPrice,
+                maxPrice: maxPrice
+            }
+        });
+    }
 
 </script>
 </body>

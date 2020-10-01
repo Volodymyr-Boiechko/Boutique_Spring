@@ -142,6 +142,10 @@
                             .find(".list__el_text")
                             .removeAttr('style');
 
+                    filterSelect
+                        .siblings('.dropdownButton')
+                        .removeAttr('style');
+
                 });
 
             },
@@ -243,25 +247,13 @@
                     $wrap.find('.list__el[data-index=' + i + ']')
                         .not('.hidden, .disabled')
                         .each(function () {
-                            $(this).toggleClass('selected', addOrRemove);
-
-                            if (typeof attr !== typeof undefined && attr !== false) {
-                                $(this).find('.list__el_text').removeAttr('style');
-                            } else {
-                                $(this).find('.list__el_text').attr('style', 'background-color: #0770cf; color: white;');
-                            }
+                            addStyles($wrap, attr, $(this));
                         });
                 }
             } else {
                 window.multiSelect.last_choice = parseInt($(this).attr('data-index'));
-                $(this).toggleClass('selected');
                 let attr = $(this).find('.list__el_text').attr('style');
-
-                if (typeof attr !== typeof undefined && attr !== false) {
-                    $(this).find('.list__el_text').removeAttr('style');
-                } else {
-                    $(this).find('.list__el_text').attr('style', 'background-color: #0770cf; color: white;');
-                }
+                addStyles($wrap, attr, $(this));
             }
 
             $wrap.find('.list__el.selected').each(function (i, el) {
@@ -285,6 +277,18 @@
             closeDropdown($wrap);
         }
     });
+
+    function addStyles($wrap, attr, list_el) {
+
+        if (typeof attr !== typeof undefined && attr !== false) {
+            $wrap.find('.dropdownButton').removeAttr('style');
+            list_el.find('.list__el_text').removeAttr('style');
+        } else {
+            $wrap.find('.dropdownButton').attr('style', 'border-top: 2px solid #0770cf;');
+            list_el.find('.list__el_text').attr('style', 'background-color: #0770cf; color: white;');
+        }
+
+    }
 
     $(document).on('keyup', '.search input', function (e) {
         if (40 === e.which) { // down
