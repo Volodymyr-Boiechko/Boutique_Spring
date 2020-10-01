@@ -38,7 +38,7 @@
                             -
                             <div id="maxPriceHeader">${maxPrice} грн</div>
                         </div>
-                        <button class="headerFilter__button" id="resetPrices">Очистити</button>
+                        <button class="headerFilterButton">Очистити</button>
                     </div>
                     <div class="middle">
                         <div class="prices">
@@ -169,7 +169,7 @@
     });
 
     //reset slider values
-    $("#resetPrices").on('click', function () {
+    $(".headerFilterButton").on('click', function () {
         document.getElementById('minPrice').innerHTML = ${minPrice} + " грн";
         document.getElementById('minPriceHeader').innerHTML = ${minPrice} + " грн";
         document.getElementById('maxPrice').innerHTML = ${maxPrice} + " грн";
@@ -196,7 +196,7 @@
         let selectedColors = getSelectedColors(null);
         let selectedSizes = getSelectedSizes(null);
 
-        filterData(selectedBrands, selectedColors, selectedSizes, ${minPrice}, ${minPrice});
+        filterData(selectedBrands, selectedColors, selectedSizes, ${minPrice}, ${maxPrice});
 
     });
 

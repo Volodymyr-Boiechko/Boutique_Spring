@@ -128,6 +128,22 @@
   }
 
 }
+.headerFilterButton {
+  background-color: inherit;
+  top: 13px;
+  border: 1px solid #666;
+  border-radius: 10px;
+  position: absolute;
+  right: 25px;
+  min-width: 100px;
+  color: #666;
+  height: 35px;
+
+  &:hover {
+    color: #0770cf;
+    border: 1px solid #0770cf;
+  }
+}
 
 #minPriceHeader, #maxPriceHeader {
   display: inline-block;
@@ -225,7 +241,7 @@ input[type=range] {
   -webkit-appearance: none;
   z-index: 2;
   height: 10px;
-  width: 100%;
+  width: 88%;
   opacity: 0;
 }
 
@@ -236,12 +252,6 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 0;
   background-color: red;
   -webkit-appearance: none;
-}
-#input-left {
-  margin-left: 15px;
-}
-#input-right {
-  padding-right: 35px;
 }
 
 .search {

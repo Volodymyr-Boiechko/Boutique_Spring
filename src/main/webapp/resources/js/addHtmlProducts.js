@@ -6,7 +6,6 @@ function addHtmlProducts(clothesList, admin,) {
 
     listOfProducts = clothesList;
     isAdmin = admin;
-    NUMBER_OF_PRODUCTS_PER_PAGE = 9;
 
     let clothesSection = document.querySelector('.clothes');
 
@@ -117,6 +116,9 @@ function morePages(number) {
 
     let start = number;
     let end = number + NUMBER_OF_PRODUCTS_PER_PAGE;
+    if (end >= listOfProducts.length) {
+        end = listOfProducts.length;
+    }
 
     addProducts(start, end);
 

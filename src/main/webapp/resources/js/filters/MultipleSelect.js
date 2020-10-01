@@ -125,25 +125,25 @@
 
             resetSelected: function () {
 
-                let filterSelect = this.$select;
-
                 $(".headerFilter__button").click(function (e) {
 
+                    let $wrap = $(this).closest('.filter');
+
                     $.extend({}, e);
-                    filterSelect.siblings(".dropdown-content")
+                    $wrap.find(".dropdown-content")
                         .find(".list__el")
                         .removeClass("selected"),
-                        filterSelect.siblings(".dropdown-content")
+                        $wrap.find(".dropdown-content")
                             .find(".headerFilter")
                             .find(".headerFilter__text")
                             .text("0 вибрано"),
-                        filterSelect.siblings(".dropdown-content")
+                        $wrap.find(".dropdown-content")
                             .find(".list")
                             .find(".list__el_text")
                             .removeAttr('style');
 
-                    filterSelect
-                        .siblings('.dropdownButton')
+                    $wrap
+                        .find('.dropdownButton')
                         .removeAttr('style');
 
                 });
