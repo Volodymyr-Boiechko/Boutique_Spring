@@ -1,10 +1,8 @@
 package com.boiechko.controller;
 
 import com.boiechko.model.Product;
-import com.boiechko.model.User;
 import com.boiechko.service.interfaces.ClothesService;
 import com.boiechko.service.interfaces.ProductService;
-import com.boiechko.service.interfaces.UserService;
 import com.boiechko.utils.ConvertStringToUtf8Util;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/clothes")
@@ -26,12 +23,10 @@ public class ClothesController {
     private final Logger logger = Logger.getLogger(ClothesController.class);
 
     private final ClothesService clothesService;
-    private final UserService userService;
     private final ProductService productService;
 
-    public ClothesController(ClothesService clothesService, UserService userService, ProductService productService) {
+    public ClothesController(ClothesService clothesService, ProductService productService) {
         this.clothesService = clothesService;
-        this.userService = userService;
         this.productService = productService;
     }
 
@@ -50,27 +45,15 @@ public class ClothesController {
     @GetMapping("/{sex}/{typeName}")
     public String onClothes(@PathVariable("sex") final String sex,
                             @PathVariable("typeName") final String typeName,
-                            @RequestParam(name = "page", defaultValue = "1") final int page,
                             @RequestParam(name = "productName", required = false) final String productName,
                             final Model model) {
 
         final ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         final HttpSession session = attributes.getRequest().getSession();
 
-        final User user = (User) session.getAttribute("user");
-        final boolean isUserCanAddClothes = userService.isUserAdmin(user);
-
-        if (page == 1) {
-            session.setAttribute("clothes", clothesService.getListOfClothes(typeName, productName, sex));
-        }
-
-        final List<Product> clothes = (List<Product>) session.getAttribute("clothes");
-
-        final int numberOfProductsShownOnPage = clothesService.getNumberOfProductsShownOnPage(page, clothes.size());
-
-        model.addAttribute("isUserCanAddClothes", isUserCanAddClothes);
-        model.addAttribute("numberOfProductsShownOnPage", numberOfProductsShownOnPage);
-        model.addAttribute("pageNumber", page);
+        session.setAttribute("clothes", clothesService.getListOfClothes(typeName, productName, sex));
+        session.setAttribute("typeName", typeName);
+        session.setAttribute("productName", productName);
 
         model.addAttribute("sex", productService.getUkrainianSex(sex));
         model.addAttribute("productName", productService.getPathToPage(typeName, productName));

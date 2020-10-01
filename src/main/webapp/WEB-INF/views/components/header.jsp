@@ -124,10 +124,11 @@
                                 <h2 class="subheader__list__dropdown__list__elem_title">Нове</h2>
 
                                 <ol class="subheader__list__dropdown__list__elem_links">
-
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/newestClothes?page=1">Дивитись
-                                            все</a></li>
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/newestClothes">
+                                            Дивитись все
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?newest=true">Одяг</a>
                                     </li>
@@ -179,15 +180,14 @@
                                 <ol class="subheader__list__dropdown__list__elem_links subheader__list__dropdown__list__elem_links_columns">
 
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?page=1">Дивитись
-                                            все</a>
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes">
+                                            Дивитись все
+                                        </a>
                                     </li>
                                     <c:forEach items="${clothesTypes}" var="product">
-
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?productName=${product.productName}&page=1">${product.productName}</a>
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?productName=${product.productName}">${product.productName}</a>
                                         </li>
-
                                     </c:forEach>
 
                                 </ol>
@@ -200,7 +200,7 @@
 
                                     <c:forEach items="${clothesTypes}" var="product" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?productName=${product.productName}&page=1">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?productName=${product.productName}">
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
@@ -229,18 +229,17 @@
                                 <h2 class="subheader__list__dropdown__list__elem_title">Сортувати за типом продукту</h2>
 
                                 <ol class="subheader__list__dropdown__list__elem_links">
-
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?page=1">Дивитись
-                                            все</a>
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes">
+                                            Дивитись все
+                                        </a>
                                     </li>
-
                                     <c:forEach items="${shoes}" var="product">
-
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?productName=${product.productName}&page=1">${product.productName}</a>
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?productName=${product.productName}">
+                                                    ${product.productName}
+                                            </a>
                                         </li>
-
                                     </c:forEach>
                                 </ol>
 
@@ -255,7 +254,7 @@
                                     <c:forEach items="${shoes}" var="product" begin="0" end="3">
 
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brand=${product.brand}&page=1">
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brand=${product.brand}">
                                                 <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                      alt="${product.productName}">
                                                 <div>${product.brand}</div>
@@ -271,7 +270,7 @@
 
                                     <c:forEach items="${shoes}" var="product" begin="0" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brand=${product.brand}&page=1">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brand=${product.brand}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
@@ -299,20 +298,18 @@
                                 <h2 class="subheader__list__dropdown__list__elem_title">Сортувати за типом продукту</h2>
 
                                 <ol class="subheader__list__dropdown__list__elem_links">
-
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?page=1">Дивитись
-                                            все</a>
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories">
+                                            Дивитись все
+                                        </a>
                                     </li>
-
                                     <c:forEach items="${accessories}" var="product">
-
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?productName=${product.productName}&page=1">${product.productName}</a>
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?productName=${product.productName}">
+                                                    ${product.productName}
+                                            </a>
                                         </li>
-
                                     </c:forEach>
-
                                 </ol>
 
                             </li>
@@ -326,7 +323,7 @@
                                     <c:forEach items="${accessories}" var="product" begin="0" end="4">
 
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brand=${product.brand}&page=1">
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brand=${product.brand}">
                                                 <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                      alt="${product.productName}">
                                                 <div>${product.brand}</div>
@@ -345,7 +342,7 @@
 
                                     <c:forEach items="${accessories}" var="product" begin="0" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brand=${product.brand}&page=1">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brand=${product.brand}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
@@ -376,18 +373,17 @@
                                 <h2 class="subheader__list__dropdown__list__elem_title">Сортувати за типом продукту</h2>
 
                                 <ol class="subheader__list__dropdown__list__elem_links">
-
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/sportWear?page=1">Дивитись
-                                            все</a>
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/sportWear">
+                                            Дивитись все
+                                        </a>
                                     </li>
-
                                     <c:forEach items="${sportWear}" var="product">
-
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/sportWear?productName=${product.productName}&page=1">${product.productName}</a>
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/sportWear?productName=${product.productName}">
+                                                    ${product.productName}
+                                            </a>
                                         </li>
-
                                     </c:forEach>
                                 </ol>
                             </li>
@@ -397,8 +393,7 @@
                                 <ul class="subheader__list__dropdown__list__elem_images">
 
                                     <c:forEach items="${sportWear}" var="product" begin="0" end="2">
-
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/sportWear?brand=${product.brand}&page=1">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/sportWear?brand=${product.brand}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
@@ -430,7 +425,7 @@
                                     style="column-count: 3;">
 
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?page=1">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands">
                                             Дивитись все
                                         </a>
                                     </li>
@@ -438,7 +433,9 @@
                                     <c:forEach items="${brands}" var="product">
 
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=${product.brand}&page=1">${product.brand}</a>
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=${product.brand}">
+                                                    ${product.brand}
+                                            </a>
                                         </li>
 
                                     </c:forEach>
@@ -453,7 +450,7 @@
 
                                     <c:forEach items="${brands}" var="product" begin="0" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=${product.brand}&page=1">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=${product.brand}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">

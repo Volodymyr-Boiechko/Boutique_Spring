@@ -8,7 +8,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.util.stream.Collectors;
 
 @Controller
 public class HeaderController {
@@ -27,8 +26,7 @@ public class HeaderController {
 
         final String sex = (String) session.getAttribute("sex");
 
-        model.addAttribute("newestProducts", productService.getProductsBySex(
-                productService.getLatestAddedProducts().stream().limit(30).collect(Collectors.toList()), sex));
+        model.addAttribute("newestProducts", productService.getProductsBySex(productService.getLatestAddedProducts(), sex));
 
         model.addAttribute("clothesTypes", productService.getUniqueProductNames("Одяг", sex));
 

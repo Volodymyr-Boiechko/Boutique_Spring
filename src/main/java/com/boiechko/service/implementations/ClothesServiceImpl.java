@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 @Service
 public class ClothesServiceImpl implements ClothesService {
 
-    private final int NUMBER_OF_PRODUCTS_PER_PAGE = 9;
-
     private final ProductService productService;
 
     public ClothesServiceImpl(ProductService productService) {
@@ -53,18 +51,6 @@ public class ClothesServiceImpl implements ClothesService {
 
         return productService.getProductsBySex(clothes, sex);
 
-    }
-
-    @Override
-    public int getNumberOfProductsShownOnPage(final int page, final int clothesSize) {
-
-        int NumberOfProductsShownOnPage = page * NUMBER_OF_PRODUCTS_PER_PAGE;
-
-        if (NumberOfProductsShownOnPage > clothesSize) {
-            NumberOfProductsShownOnPage = clothesSize;
-        }
-
-        return NumberOfProductsShownOnPage;
     }
 
     @Override
@@ -106,9 +92,9 @@ public class ClothesServiceImpl implements ClothesService {
     private List<Product> getClothes(final String typeName, final String productName) {
 
         if (productName == null) {
-            return productService.getProductsByColumnInRandomOrder("typeName", productService.getUkrainianTypeName(typeName));
+            return productService.getProductsByColumn("typeName", productService.getUkrainianTypeName(typeName));
         } else {
-            return productService.getProductsByColumnInRandomOrder("productName", productName);
+            return productService.getProductsByColumn("productName", productName);
         }
     }
 

@@ -36,7 +36,7 @@
                                         <div class="clothes__block__img">
 
                                             <img class="clothes__block__img_main"
-                                                 src="${pageContext.request.contextPath}${product.image}"
+                                                 src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
 
                                             <div class="hover"></div>

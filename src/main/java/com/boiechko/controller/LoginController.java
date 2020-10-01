@@ -55,6 +55,7 @@ public class LoginController {
                     if (isEnteredPasswordEqualUserPassword) {
 
                         session.setAttribute("user", userService.getUserByColumn("username", username));
+                        session.setAttribute("admin", userService.isUserAdmin(user));
 
                         logger.info(username + " logged in");
 

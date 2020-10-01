@@ -53,107 +53,9 @@
 
         </div>
 
-        <jsp:include page="/clothesFilter"/>
+        <jsp:include page="/clothesFilterPage"/>
 
-        <div class="clothes">
-
-            <div class="container">
-
-                <div>
-
-                    <div class="row">
-
-                        <c:forEach items="${sessionScope.clothes}" begin="0" end="${numberOfProductsShownOnPage - 1}"
-                                   var="product">
-
-                            <div class="block col-md-4" id="${product.idProduct}">
-
-                                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/productItem/${product.idProduct}">
-
-                                    <div class="clothes__block">
-
-                                        <div class="clothes__block__img">
-
-                                            <img class="clothes__block__img_main"
-                                                 src="${pageContext.request.contextPath}/resources/${product.image}"
-                                                 alt="${product.productName}">
-
-                                            <div class="hover"></div>
-
-                                        </div>
-
-                                        <div class="clothes__block__text">
-
-                                            <div class="clothes__block__text_title">
-                                                    ${product.description}
-                                            </div>
-
-                                            <div class="clothes__block__text_price">
-                                                    ${product.price} грн.
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </a>
-
-                                <button onclick="addToFavorite(${product.idProduct})"
-                                        class="clothes__block__img__favorite">
-
-                                    <img class="clothes__block__img__favorite_img" id="favorite"
-                                         src="${pageContext.request.contextPath}/resources/img/other/favorite.png"
-                                         alt="favorite">
-
-                                </button>
-
-                            </div>
-
-                        </c:forEach>
-
-                        <c:if test="${not empty sessionScope.user}">
-
-                            <c:if test="${isUserCanAddClothes}">
-
-                                <div class="col-md-4">
-
-                                    <div class="clothes__block" style="border: 0.5px grey solid;">
-
-                                        <button name="addButton" class="clothes__block__addButton" id="addButton">
-
-                                            <img src="${pageContext.request.contextPath}/resources/img/other/add.jpg"
-                                                 alt="add">
-
-                                        </button>
-
-                                    </div>
-
-                                </div>
-
-                            </c:if>
-
-                        </c:if>
-
-                    </div>
-
-                </div>
-
-                <div class="clothes__more">
-
-                    <div class="clothes__more_title">Ви переглянули ${numberOfProductsShownOnPage}
-                        із ${sessionScope.clothes.size()} товарів
-                    </div>
-
-                    <c:if test="${sessionScope.clothes.size() != numberOfProductsShownOnPage}">
-
-                        <button onclick="morePages()" class="clothes__more__downloadMore">Загрузити ще</button>
-
-                    </c:if>
-
-                </div>
-
-            </div>
-
-        </div>
+        <div class="clothes"></div>
 
     </c:otherwise>
 
@@ -169,10 +71,23 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath}/resources/js/plugins/MultipleSelect.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/plugins/PluginForMultipleSelect.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/filters/MultipleSelect.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/filters/PluginForMultipleSelect.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/addToFavorite.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/addHtmlProducts.js"></script>
 <script charset="utf-8">
+
+    let listOfClothes = [
+        <c:forEach items="${sessionScope.clothes}" var="product">
+            {
+                idProduct: ${product.idProduct}, typeName: "${product.typeName}", productName: "${product.productName}", sex: "${product.sex}",
+                brand: "${product.brand}", model: "${product.model}", size: "${product.size}", color: "${product.color}", image: "${product.image}",
+                price: ${product.price}, description: "${product.description}"
+            },
+        </c:forEach>
+    ];
+
+    addHtmlProducts(listOfClothes, ${not empty sessionScope.user && sessionScope.admin != false});
 
     let array = ${sessionScope.idsOfProductsThatAreFavorite};
 
@@ -197,30 +112,7 @@
         }
     }, 1);
 
-    function morePages() {
-
-        let page = ${pageNumber} +1;
-
-        let href = window.location.href;
-
-        if (href.includes("page=") === false) {
-            window.location.href = href.concat("&page=" + page);
-        } else {
-            window.location.href = href.replace('page=${pageNumber}', 'page=' + page);
-        }
-
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        let scrollPos = localStorage.getItem('scrollPos');
-        if (scrollPos) window.scrollTo(0, scrollPos);
-    });
-
-    window.onbeforeunload = function (e) {
-        localStorage.setItem('scrollPos', window.scrollY);
-    };
-
-    let isUserAdmin = ${isUserCanAddClothes};
+    let isUserAdmin = ${not empty sessionScope.user && sessionScope.admin != false};
 
     if (isUserAdmin === true) {
 
@@ -321,7 +213,7 @@
             "                </li>\n" +
             "\n" +
             "                <li>\n" +
-            "                    <button id=\"button\" class=\"modalw__button\">Добавити до бази</button>\n" +
+            "                    <button id=\"addProductButton\" class=\"modalw__button\">Добавити до бази</button>\n" +
             "                </li>\n" +
             "\n" +
             "            </ul>\n" +

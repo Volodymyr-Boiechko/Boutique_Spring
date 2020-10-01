@@ -10,8 +10,6 @@ public interface ClothesService {
 
     List<Product> getListOfClothes(final String typeName, final String productName, final String sex);
 
-    int getNumberOfProductsShownOnPage(final int page, final int clothesSize);
-
     List<Product> getFavoriteProducts(final List<Integer> idsOfProductsWhichAreFavorite);
 
     boolean isFavoriteProduct(final List<Integer> idsOfProductsWhichAreFavorite, final Product product);
