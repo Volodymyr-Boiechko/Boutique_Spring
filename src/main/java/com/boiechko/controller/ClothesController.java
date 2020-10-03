@@ -51,6 +51,15 @@ public class ClothesController {
         final ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         final HttpSession session = attributes.getRequest().getSession();
 
+        final String[] brands = attributes.getRequest().getParameterValues("brands");
+        if (brands != null) {
+            session.setAttribute("filterName", "brands");
+            session.setAttribute("filterObjects", brands);
+        } else {
+            session.setAttribute("filterName", null);
+            session.setAttribute("filterObjects", null);
+        }
+
         session.setAttribute("clothes", clothesService.getListOfClothes(typeName, productName, sex));
         session.setAttribute("typeName", typeName);
         session.setAttribute("productName", productName);

@@ -25,14 +25,14 @@
                 <div class="allTypes__block">
 
                     <c:if test="${sessionScope.sex == 'man'}">
-                        <a href="${pageContext.request.contextPath}/clothes/man/newestClothes?page=1">
+                        <a href="${pageContext.request.contextPath}/clothes/man/newestClothes">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/man/newest.jpg"
                                  alt="newest">
                         </a>
                     </c:if>
                     <c:if test="${sessionScope.sex == 'woman'}">
-                        <a href="${pageContext.request.contextPath}/clothes/woman/newestClothes?page=1">
+                        <a href="${pageContext.request.contextPath}/clothes/woman/newestClothes">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/woman/newest.jpg"
                                  alt="newest">
@@ -53,14 +53,14 @@
                 <div class="allTypes__block">
 
                     <c:if test="${sessionScope.sex == 'man'}">
-                        <a href="${pageContext.request.contextPath}/clothes/man/clothes?page=1">
+                        <a href="${pageContext.request.contextPath}/clothes/man/clothes">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/man/clothes.png"
                                  alt="clothes">
                         </a>
                     </c:if>
                     <c:if test="${sessionScope.sex == 'woman'}">
-                        <a href="${pageContext.request.contextPath}/clothes/woman/clothes?page=1">
+                        <a href="${pageContext.request.contextPath}/clothes/woman/clothes">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/woman/clothes.jpg"
                                  alt="clothes">
@@ -81,14 +81,14 @@
                 <div class="allTypes__block">
 
                     <c:if test="${sessionScope.sex == 'man'}">
-                        <a href="${pageContext.request.contextPath}/clothes/man/shoes?page=1">
+                        <a href="${pageContext.request.contextPath}/clothes/man/shoes">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/man/sneakers.jpg"
                                  alt="shoes">
                         </a>
                     </c:if>
                     <c:if test="${sessionScope.sex == 'woman'}">
-                        <a href="${pageContext.request.contextPath}/clothes/woman/shoes?page=1">
+                        <a href="${pageContext.request.contextPath}/clothes/woman/shoes">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/woman/sneakers.jpg"
                                  alt="shoes">
@@ -109,14 +109,14 @@
                 <div class="allTypes__block">
 
                     <c:if test="${sessionScope.sex == 'man'}">
-                        <a href="${pageContext.request.contextPath}/clothes/man/accessories?page=1">
+                        <a href="${pageContext.request.contextPath}/clothes/man/accessories">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/man/accessories.jpg"
                                  alt="accessories">
                         </a>
                     </c:if>
                     <c:if test="${sessionScope.sex == 'woman'}">
-                        <a href="${pageContext.request.contextPath}/clothes/woman/accessories?page=1">
+                        <a href="${pageContext.request.contextPath}/clothes/woman/accessories">
                             <img class="allTypes__block_image"
                                  src="${pageContext.request.contextPath}/resources/img/homePage/woman/accessories.jpg"
                                  alt="accessories">
@@ -145,7 +145,7 @@
         <ul class="brands__list">
 
             <li class="brands__list__element">
-                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=The North Face&page=1">
+                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/allClothes?brands=The North Face">
                     <img class="brands__list__element_img"
                          src="${pageContext.request.contextPath}/resources/img/homePage/brands/north-face.png"
                          alt="North-Face">
@@ -153,7 +153,7 @@
             </li>
 
             <li class="brands__list__element" style="padding-top: 37px;">
-                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=Lacoste&page=1">
+                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/allClothes?brands=Lacoste">
                     <img class="brands__list__element_img"
                          src="${pageContext.request.contextPath}/resources/img/homePage/brands/lacoste.png"
                          alt="Lacoste">
@@ -161,14 +161,14 @@
             </li>
 
             <li class="brands__list__element" style="padding-top: 45px;">
-                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=Nike&page=1">
+                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/allClothes?brand=Nike">
                     <img class="brands__list__element_img"
                          src="${pageContext.request.contextPath}/resources/img/homePage/brands/nike.png" alt="Nike">
                 </a>
             </li>
 
             <li class="brands__list__element">
-                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=Tommy Hilfiger&page=1">
+                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/allClothes?brands=Tommy Hilfiger">
                     <img class="brands__list__element_img"
                          src="${pageContext.request.contextPath}/resources/img/homePage/brands/tommy-hilfiger.png"
                          alt="Tommy-Hilfiger">
@@ -176,7 +176,7 @@
             </li>
 
             <li class="brands__list__element" style="padding-top: 20px;">
-                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=Louis Vuitton&page=1">
+                <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/allClothes?brands=Louis Vuitton">
                     <img class="brands__list__element_img"
                          src="${pageContext.request.contextPath}/resources/img/homePage/brands/louis-vuitton.png"
                          alt="Louis-Vuitton">

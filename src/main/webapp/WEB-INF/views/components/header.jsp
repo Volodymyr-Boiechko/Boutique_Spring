@@ -254,7 +254,7 @@
                                     <c:forEach items="${shoes}" var="product" begin="0" end="3">
 
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brand=${product.brand}">
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brands=${product.brand}">
                                                 <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                      alt="${product.productName}">
                                                 <div>${product.brand}</div>
@@ -270,7 +270,7 @@
 
                                     <c:forEach items="${shoes}" var="product" begin="0" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brand=${product.brand}">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brands=${product.brand}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
@@ -323,7 +323,7 @@
                                     <c:forEach items="${accessories}" var="product" begin="0" end="4">
 
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brand=${product.brand}">
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brands=${product.brand}">
                                                 <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                      alt="${product.productName}">
                                                 <div>${product.brand}</div>
@@ -342,7 +342,7 @@
 
                                     <c:forEach items="${accessories}" var="product" begin="0" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brand=${product.brand}">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brands=${product.brand}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
@@ -433,7 +433,7 @@
                                     <c:forEach items="${brands}" var="product">
 
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=${product.brand}">
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brands=${product.brand}">
                                                     ${product.brand}
                                             </a>
                                         </li>
@@ -450,7 +450,7 @@
 
                                     <c:forEach items="${brands}" var="product" begin="0" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brand=${product.brand}">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brands=${product.brand}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">

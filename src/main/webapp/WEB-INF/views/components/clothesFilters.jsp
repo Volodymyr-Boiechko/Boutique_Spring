@@ -27,7 +27,9 @@
                 <div class="dropdown-content hidden">
                     <div class="list list__sort">
                         <div class="list__el__sort" data-value="0" data-index="0">
-                            <div class="list__el__sort_text" style="background-color: #0770cf; color: white;">Ми рекомендуємо</div>
+                            <div class="list__el__sort_text" style="background-color: #0770cf; color: white;">Ми
+                                рекомендуємо
+                            </div>
                         </div>
                         <div class="list__el__sort">
                             <div class="list__el__sort_text">Новинки</div>
@@ -123,6 +125,49 @@
 
         loadData("sizes", sizes, "size", "Розмір");
 
+        // user selected sort by brands in header section
+        let filterName = "${sessionScope.filterName}";
+        if (filterName !== "") {
+
+            let filterObjects = [
+                <c:forEach items="${sessionScope.filterObjects}" var="item">
+                "${item}",
+                </c:forEach>
+            ];
+
+            let selectFilter = $('#' + filterName + '');
+            let listElements = $(selectFilter).closest('.filter').find('.dropdown-content').find('.list').find('.list__el');
+            let count = 0;
+            for (let i = 0; i < filterObjects.length; i++) {
+
+                let object = filterObjects[i];
+
+                for (let i = 0; i < listElements.length; i++) {
+
+                    let value = $(listElements[i]).attr('data-value');
+
+                    if (value === object) {
+                        count++;
+                        $(listElements[i]).addClass('selected');
+                        $(listElements[i]).find('.list__el_text').attr('style', 'background-color: #0770cf; color: white;');
+                        $(listElements[i]).closest('.filter').find('.dropdownButton').attr('style', 'border-top: 2px solid #0770cf;');
+                    }
+
+                }
+            }
+            let headerFilter__text = $(listElements).closest('.dropdown-content').find('.headerFilter').find('.headerFilter__text');
+            $(headerFilter__text).html(count + ' вибрано');
+
+            let selectedBrands = getSelectedBrands(null);
+            let selectedColors = getSelectedColors(null);
+            let selectedSizes = getSelectedSizes(null);
+            let minPrice = getLeftValue();
+            let maxPrice = getRightValue();
+            let sortBy = getSortBy();
+
+            filterData(sortBy, selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
+
+        }
 
         // if user selected filter
         $(".list__el").on('click', function (e) {
