@@ -20,7 +20,28 @@
 
         <ul class="filters__list">
 
-            <select id="sort"></select>
+            <li class="filter">
+                <button class="dropdownButton">
+                    <div class="dropdownButton__text">Сортувати</div>
+                </button>
+                <div class="dropdown-content hidden">
+                    <div class="list list__sort">
+                        <div class="list__el__sort" data-value="0" data-index="0">
+                            <div class="list__el__sort_text" style="background-color: #0770cf; color: white;">Ми рекомендуємо</div>
+                        </div>
+                        <div class="list__el__sort">
+                            <div class="list__el__sort_text">Новинки</div>
+                        </div>
+                        <div class="list__el__sort">
+                            <div class="list__el__sort_text">Сортувати за зростанням</div>
+                        </div>
+                        <div class="list__el__sort">
+                            <div class="list__el__sort_text">Сортувати за спаданням</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
             <select id="sizes"></select>
             <select id="brands"></select>
             <select id="colors"></select>
@@ -102,10 +123,6 @@
 
         loadData("sizes", sizes, "size", "Розмір");
 
-        let sort = [{id: 1, name: "Новинки"}, {id: 2, name: "Сортувати за зростанням"},
-            {id: 3, name: "Сортувати за спаданням"}];
-
-        loadData("sort", sort, "name", "Сортувати");
 
         // if user selected filter
         $(".list__el").on('click', function (e) {
@@ -123,8 +140,9 @@
             let selectedSizes = getSelectedSizes(null);
             let minPrice = getLeftValue();
             let maxPrice = getRightValue();
+            let sortBy = getSortBy();
 
-            filterData(selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
+            filterData(sortBy, selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
 
         });
 
@@ -138,8 +156,9 @@
             let selectedSizes = getSelectedSizes(filter);
             let minPrice = getLeftValue();
             let maxPrice = getRightValue();
+            let sortBy = getSortBy();
 
-            filterData(selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
+            filterData(sortBy, selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
 
         });
 
@@ -163,17 +182,18 @@
         let selectedBrands = getSelectedBrands(null);
         let selectedColors = getSelectedColors(null);
         let selectedSizes = getSelectedSizes(null);
+        let sortBy = getSortBy();
 
-        filterData(selectedBrands, selectedColors, selectedSizes, minPriceSelected, maxPriceSelected);
+        filterData(sortBy, selectedBrands, selectedColors, selectedSizes, minPriceSelected, maxPriceSelected);
 
     });
 
     //reset slider values
     $(".headerFilterButton").on('click', function () {
-        document.getElementById('minPrice').innerHTML = ${minPrice} + " грн";
-        document.getElementById('minPriceHeader').innerHTML = ${minPrice} + " грн";
-        document.getElementById('maxPrice').innerHTML = ${maxPrice} + " грн";
-        document.getElementById('maxPriceHeader').innerHTML = ${maxPrice} + " грн";
+        document.getElementById('minPrice').innerHTML = ${minPrice} +" грн";
+        document.getElementById('minPriceHeader').innerHTML = ${minPrice} +" грн";
+        document.getElementById('maxPrice').innerHTML = ${maxPrice} +" грн";
+        document.getElementById('maxPriceHeader').innerHTML = ${maxPrice} +" грн";
 
         let inputLeft = document.getElementById('input-left');
         let inputRight = document.getElementById('input-right');
@@ -195,12 +215,64 @@
         let selectedBrands = getSelectedBrands(null);
         let selectedColors = getSelectedColors(null);
         let selectedSizes = getSelectedSizes(null);
+        let sortBy = getSortBy();
 
-        filterData(selectedBrands, selectedColors, selectedSizes, ${minPrice}, ${maxPrice});
+        filterData(sortBy, selectedBrands, selectedColors, selectedSizes, ${minPrice}, ${maxPrice});
 
     });
 
-    function filterData(selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice) {
+    $(".list__el__sort").on('click', function () {
+
+        let $wrap = $(this).closest('.filter');
+
+        $wrap.find(".dropdown-content")
+            .find(".list")
+            .find(".list__el__sort_text")
+            .removeAttr('style');
+
+        let text = $(this).find('.list__el__sort_text').text();
+
+        $(this)
+            .find(".list__el__sort_text")
+            .attr('style', 'background-color: #0770cf; color: white;');
+
+        if (text === 'Ми рекомендуємо') {
+            $wrap
+                .find('.dropdownButton')
+                .removeAttr('style');
+        } else {
+            $wrap.find('.dropdownButton').attr('style', 'border-top: 2px solid #0770cf;');
+        }
+
+        let selectedBrands = getSelectedBrands(null);
+        let selectedColors = getSelectedColors(null);
+        let selectedSizes = getSelectedSizes(null);
+        let minPrice = getLeftValue();
+        let maxPrice = getRightValue();
+        let sortBy = getSortBy();
+
+        filterData(sortBy, selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
+
+    });
+
+    function getSortBy() {
+
+        let sortListElementsText = $(".list__el__sort_text");
+
+        for (let i = 0; i < sortListElementsText.length; i++) {
+
+            let listElementText = sortListElementsText[i];
+            let attr = $(listElementText).attr('style');
+
+            if (typeof attr !== typeof undefined && attr !== false) {
+                return listElementText.textContent;
+            }
+
+        }
+
+    }
+
+    function filterData(sortBy, selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice) {
 
         $.ajax({
             url: '/filterClothes',
@@ -209,6 +281,7 @@
             contentType: 'application/json; charset=UTF-8',
             datatype: "JSON",
             data: {
+                sortBy: sortBy,
                 selectedBrands: selectedBrands,
                 selectedColors: selectedColors,
                 selectedSizes: selectedSizes,

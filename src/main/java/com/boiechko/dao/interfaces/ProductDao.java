@@ -12,7 +12,7 @@ public interface ProductDao extends Dao<Product> {
 
     List<Product> groupByColumn(final String column);
 
-    List<Product> getProductsWithFilters(final String typeName, final String productName, final String sex,
+    List<Product> getProductsWithFilters(final String sortBy, final String typeName, final String productName, final String sex,
                                          final String[] selectedBrands, final String[] selectedColors,
                                          final String[] selectedSizes, final int minPrice, final int maxPrice);
 

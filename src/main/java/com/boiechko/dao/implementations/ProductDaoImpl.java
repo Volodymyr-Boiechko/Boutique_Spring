@@ -45,7 +45,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Product> getProductsWithFilters(final String typeName, final String productName, final String sex,
+    public List<Product> getProductsWithFilters(final String sortBy, final String typeName, final String productName, final String sex,
                                                 final String[] selectedBrands, final String[] selectedColors,
                                                 final String[] selectedSizes, final int minPrice, final int maxPrice) {
 
@@ -65,6 +65,12 @@ public class ProductDaoImpl implements ProductDao {
 
         if (selectedSizes != null) {
             queryString += " AND product.size IN (:sizes)";
+        }
+
+        switch (sortBy) {
+            case "Новинки": queryString += " ORDER BY product.idProduct ASC"; break;
+            case "Сортувати за зростанням": queryString += " ORDER BY product.price ASC"; break;
+            case "Сортувати за спаданням": queryString += " ORDER BY product.price DESC"; break;
         }
 
         final Query<Product> query = sessionFactory.getCurrentSession()

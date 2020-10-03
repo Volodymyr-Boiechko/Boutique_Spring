@@ -47,7 +47,8 @@ public class ClothesFiltersController {
 
     @GetMapping(value = "/filterClothes")
     public @ResponseBody
-    ResponseEntity<List<Product>> filterClothes(@RequestParam(value = "selectedBrands[]", required = false) String[] selectedBrands,
+    ResponseEntity<List<Product>> filterClothes(@RequestParam(value = "sortBy", required = false) final String sortBy,
+                                                @RequestParam(value = "selectedBrands[]", required = false) String[] selectedBrands,
                                                 @RequestParam(value = "selectedColors[]", required = false) String[] selectedColors,
                                                 @RequestParam(value = "selectedSizes[]", required = false) String[] selectedSizes,
                                                 @RequestParam(value = "minPrice", required = false) final int minPrice,
@@ -57,13 +58,12 @@ public class ClothesFiltersController {
         final ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         final HttpSession session = attributes.getRequest().getSession();
 
-        final List<Product> clothes = (List<Product>) session.getAttribute("clothes");
         final String typeName = (String) session.getAttribute("typeName");
         final String productName = (String) session.getAttribute("productName");
         final String sex = (String) session.getAttribute("sex");
 
         final List<Product> filteredClothes = clothesFilterService
-                .getProductsWithFilters(productService.getUkrainianTypeName(typeName), productName,
+                .getProductsWithFilters(sortBy, productService.getUkrainianTypeName(typeName), productName,
                         productService.getUkrainianSex(sex), selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
 
         if (filteredClothes.isEmpty()) {

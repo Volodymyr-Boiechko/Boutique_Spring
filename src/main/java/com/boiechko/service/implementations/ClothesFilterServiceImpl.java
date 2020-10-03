@@ -55,11 +55,11 @@ public class ClothesFilterServiceImpl implements ClothesFilterService {
     }
 
     @Override
-    public List<Product> getProductsWithFilters(final String typeName, final String productName, final String sex,
+    public List<Product> getProductsWithFilters(final String sortBy, final String typeName, final String productName, final String sex,
                                                 final String[] selectedBrands, final String[] selectedColors,
                                                 final String[] selectedSizes, final int minPrice, final int maxPrice) {
 
-        return productDao.getProductsWithFilters(typeName, productName, sex,
+        return productDao.getProductsWithFilters(sortBy, typeName, productName, sex,
                 selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
     }
 
