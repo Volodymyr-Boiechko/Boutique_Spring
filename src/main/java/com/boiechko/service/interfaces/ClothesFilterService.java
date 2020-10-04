@@ -10,7 +10,7 @@ public interface ClothesFilterService {
 
     List<String> getAllColorsOfClothes(final List<Product> clothes);
 
-    List<String> getAllModelsOfClothes(final List<Product> clothes);
+    List<String> getAllSizesOfClothes(final List<Product> clothes);
 
     List<Product> getProductsWithFilters(final String sortBy, final String typeName, final String productName, final String sex,
                                          final String[] selectedBrands,

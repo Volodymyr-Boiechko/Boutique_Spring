@@ -45,10 +45,10 @@ public class ClothesFilterServiceImpl implements ClothesFilterService {
     }
 
     @Override
-    public List<String> getAllModelsOfClothes(List<Product> clothes) {
+    public List<String> getAllSizesOfClothes(List<Product> clothes) {
         return clothes
                 .stream()
-                .map(Product::getModel)
+                .map(Product::getSize)
                 .distinct()
                 .sorted()
                 .collect(Collectors.toList());

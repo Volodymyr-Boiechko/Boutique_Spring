@@ -7,31 +7,11 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProductsByColumn(final String column, final String credentials);
-
-    List<Product> getLatestAddedProducts();
-
     List<Product> getUniqueProductNames(final String typeName, final String sex);
 
-    List<Product> groupByColumn(final String column);
+    List<Product> getUniqueNamesOfPopularBrands(final String sex);
 
-    List<Product> getUniqueNamesOfPopularBrands();
-
-    List<Product> getPopularBrands();
-
-    List<Product> getProductsThatUserMayLike(final Product product);
-
-    List<Product> getProductsBySex(final List<Product> products, final String sex);
-
-    void addProduct(final Product product);
-
-    Product getProductById(final int idProduct);
-
-    List<Product> getAllProducts();
-
-    void updateProduct(final Product product);
-
-    void deleteProduct(final Product product);
+    List<Product> getProductsThatUserMayLike(final Product product, final String sex);
 
     boolean saveImageOfProduct(final MultipartFile image, final String destination);
 
@@ -44,5 +24,15 @@ public interface ProductService {
     String getEnglishTypeName(final String ukrainianTypeName);
 
     String getPathToPage(final String typeName, final String productName);
+
+    void addProduct(final Product product);
+
+    Product getProductById(final int idProduct);
+
+    List<Product> getAllProducts();
+
+    void updateProduct(final Product product);
+
+    void deleteProduct(final Product product);
 
 }

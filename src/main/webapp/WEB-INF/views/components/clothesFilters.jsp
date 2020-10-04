@@ -26,13 +26,16 @@
                 </button>
                 <div class="dropdown-content hidden">
                     <div class="list list__sort">
-                        <div class="list__el__sort" data-value="0" data-index="0">
-                            <div class="list__el__sort_text" style="background-color: #0770cf; color: white;">Ми
-                                рекомендуємо
+                        <c:if test="${sessionScope.typeName.equals('newestClothes') != true}">
+                            <div class="list__el__sort">
+                                <div class="list__el__sort_text" style="background-color: #0770cf; color: white;">Ми рекомендуємо</div>
                             </div>
-                        </div>
+                        </c:if>
                         <div class="list__el__sort">
-                            <div class="list__el__sort_text">Новинки</div>
+                            <div class="list__el__sort_text"
+                                 <c:if test="${sessionScope.typeName.equals('newestClothes') == true}">style="background-color: #0770cf; color: white;" </c:if>>
+                                Новинки
+                            </div>
                         </div>
                         <div class="list__el__sort">
                             <div class="list__el__sort_text">Сортувати за зростанням</div>
@@ -165,8 +168,51 @@
             let maxPrice = getRightValue();
             let sortBy = getSortBy();
 
+            if (count === 0 ) {
+                selectedBrands = filterObjects;
+            }
+
             filterData(sortBy, selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
 
+        }
+
+        let newClothes = ${sessionScope.newest};
+        if (newClothes === true) {
+            let listElements = $('.list__sort').find('.list__el__sort');
+
+            listElements.find(".list__el__sort_text").removeAttr('style');
+
+            for (let i = 0; i < listElements.length; i++) {
+
+                let sort = $(listElements[i]).find('.list__el__sort_text').text();
+
+                if (sort.includes('Новинки') || sort === 'Новинки') {
+                    $(listElements[i]).find('.list__el__sort_text').attr('style', 'background-color: #0770cf; color: white;');
+                    $(listElements).closest('.filter').find('.dropdownButton').attr('style', 'border-top: 2px solid #0770cf;');
+
+                    let selectedBrands = getSelectedBrands(null);
+                    let selectedColors = getSelectedColors(null);
+                    let selectedSizes = getSelectedSizes(null);
+                    let minPrice = getLeftValue();
+                    let maxPrice = getRightValue();
+                    let sortBy = getSortBy();
+
+                    filterData(sortBy, selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
+                }
+
+            }
+
+        }
+        let newestClothesPage = "${sessionScope.typeName}";
+        if (newestClothesPage === "newestClothes") {
+            let selectedBrands = getSelectedBrands(null);
+            let selectedColors = getSelectedColors(null);
+            let selectedSizes = getSelectedSizes(null);
+            let minPrice = getLeftValue();
+            let maxPrice = getRightValue();
+            let sortBy = getSortBy();
+
+            filterData(sortBy, selectedBrands, selectedColors, selectedSizes, minPrice, maxPrice);
         }
 
         // if user selected filter
@@ -210,7 +256,7 @@
     });
 
     //if user moved slider
-    $("#input-left, #input-right").on('input change', function () {
+    $("#input-left, #input-right").on('input change', function ()   {
 
         $(".dropdownButton__prices").attr('style', "border-top: 2px solid #0770cf");
 
@@ -281,7 +327,13 @@
             .find(".list__el__sort_text")
             .attr('style', 'background-color: #0770cf; color: white;');
 
-        if (text === 'Ми рекомендуємо') {
+        let compareText = 'Ми рекомендуємо';
+        <c:if test="${sessionScope.typeName.equals('newestClothes') == true}">
+        compareText = 'Новинки';
+        </c:if>
+
+
+        if (text === compareText || text.includes(compareText) === true) {
             $wrap
                 .find('.dropdownButton')
                 .removeAttr('style');

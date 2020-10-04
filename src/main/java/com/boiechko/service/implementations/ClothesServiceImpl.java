@@ -1,12 +1,12 @@
 package com.boiechko.service.implementations;
 
+import com.boiechko.dao.interfaces.ProductDao;
 import com.boiechko.model.OrderDetails;
 import com.boiechko.model.Product;
 import com.boiechko.service.interfaces.ClothesService;
 import com.boiechko.service.interfaces.ProductService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,41 +15,18 @@ import java.util.stream.Collectors;
 public class ClothesServiceImpl implements ClothesService {
 
     private final ProductService productService;
+    private final ProductDao productDao;
 
-    public ClothesServiceImpl(ProductService productService) {
+    public ClothesServiceImpl(ProductService productService, ProductDao productDao) {
         this.productService = productService;
+        this.productDao = productDao;
     }
 
     @Override
     public List<Product> getListOfClothes(final String typeName, final String productName, final String sex) {
 
-        List<Product> clothes;
-
-        switch (typeName) {
-            case "clothes":
-            case "shoes":
-            case "accessories":
-            case "sportWear": {
-
-                clothes = getClothes(typeName, productName);
-                break;
-            }
-            case "newestClothes": {
-
-                clothes = productService.getLatestAddedProducts();
-                break;
-            }
-            case "brands": {
-
-                clothes = productService.getPopularBrands();
-                break;
-            }
-            default:
-                clothes = new ArrayList<>();
-
-        }
-
-        return productService.getProductsBySex(clothes, sex);
+        return productDao.
+                getProducts(productService.getUkrainianTypeName(typeName), productName, productService.getUkrainianSex(sex));
 
     }
 
@@ -88,14 +65,4 @@ public class ClothesServiceImpl implements ClothesService {
         }
 
     }
-
-    private List<Product> getClothes(final String typeName, final String productName) {
-
-        if (productName == null) {
-            return productService.getProductsByColumn("typeName", productService.getUkrainianTypeName(typeName));
-        } else {
-            return productService.getProductsByColumn("productName", productName);
-        }
-    }
-
 }

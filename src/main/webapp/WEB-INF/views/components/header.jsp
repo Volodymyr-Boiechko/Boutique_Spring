@@ -133,10 +133,13 @@
                                         <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?newest=true">Одяг</a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/footwear?newest=true">Взуття</a>
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?newest=true">Взуття</a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?newest=true">Аксесуари</a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/sportWear?newest=true">Спортивний одяг</a>
                                     </li>
                                 </ol>
                             </li>
@@ -149,7 +152,7 @@
 
                                     <c:forEach items="${newestProducts}" var="product" begin="0" end="2">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?productName=${product.productName}">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/newestClothes?brands=${product.brand.replace('&','%26')}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
@@ -200,7 +203,7 @@
 
                                     <c:forEach items="${clothesTypes}" var="product" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?productName=${product.productName}">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/clothes?brands=${product.brand.replace('&','%26')}">
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
                                             <p>${product.brand}</p>
@@ -254,7 +257,7 @@
                                     <c:forEach items="${shoes}" var="product" begin="0" end="3">
 
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brands=${product.brand}">
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brands=${product.brand.replace('&','%26')}">
                                                 <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                      alt="${product.productName}">
                                                 <div>${product.brand}</div>
@@ -270,7 +273,7 @@
 
                                     <c:forEach items="${shoes}" var="product" begin="0" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brands=${product.brand}">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/shoes?brands=${product.brand.replace('&','%26')}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
@@ -323,7 +326,7 @@
                                     <c:forEach items="${accessories}" var="product" begin="0" end="4">
 
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brands=${product.brand}">
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brands=${product.brand.replace('&','%26')}">
                                                 <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                      alt="${product.productName}">
                                                 <div>${product.brand}</div>
@@ -342,7 +345,7 @@
 
                                     <c:forEach items="${accessories}" var="product" begin="0" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brands=${product.brand}">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/accessories?brands=${product.brand.replace('&','%26')}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
@@ -393,7 +396,7 @@
                                 <ul class="subheader__list__dropdown__list__elem_images">
 
                                     <c:forEach items="${sportWear}" var="product" begin="0" end="2">
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/sportWear?brand=${product.brand}">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/sportWear?brand=${product.brand.replace('&','%26')}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">
@@ -433,7 +436,7 @@
                                     <c:forEach items="${brands}" var="product">
 
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brands=${product.brand}">
+                                            <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brands=${product.brand.replace('&','%26')}">
                                                     ${product.brand}
                                             </a>
                                         </li>
@@ -450,7 +453,7 @@
 
                                     <c:forEach items="${brands}" var="product" begin="0" end="1">
 
-                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brands=${product.brand}">
+                                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/brands?brands=${product.brand.replace('&','%26')}">
 
                                             <img src="${pageContext.request.contextPath}/resources/${product.image}"
                                                  alt="${product.productName}">

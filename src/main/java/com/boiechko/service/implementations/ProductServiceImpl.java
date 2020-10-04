@@ -29,81 +29,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsByColumn(final String column, final String credentials) {
-        return productDao.getProductsByColumn(column, credentials);
-    }
-
-    @Override
-    public List<Product> getLatestAddedProducts() {
-        return productDao.getLatestAddedProducts();
-    }
-
-    @Override
-    public List<Product> getUniqueProductNames(final String typeName, final String sex) {
-
-        return productDao.getProductsByColumn("typeName", typeName)
-                .stream()
-                .filter(product -> product.getSex().equals(getUkrainianSex(sex)))
-                .filter(distinctByKey(Product::getProductName))
-                .collect(Collectors.toList());
-
-    }
-
-    private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
-        final Set<Object> seen = ConcurrentHashMap.newKeySet();
-        return product -> seen.add(keyExtractor.apply(product));
-    }
-
-    @Override
-    public List<Product> groupByColumn(final String column) {
-        return productDao.groupByColumn(column);
-    }
-
-    @Override
-    public List<Product> getUniqueNamesOfPopularBrands() {
-
-        return productDao.groupByColumn("brand")
-                .stream()
-                .map(Product::getBrand)
-                .map(brand -> getProductsByColumn("brand", brand))
-                .filter(products -> products.size() >= 10)
-                .map(products -> products.get(0))
-                .sorted(Comparator.comparing(Product::getBrand))
-                .collect(Collectors.toList());
-
-    }
-
-    @Override
-    public List<Product> getPopularBrands() {
-        return productDao.groupByColumn("brand")
-                .stream()
-                .map(Product::getBrand)
-                .map(brand -> productDao.getProductsByColumn("brand", brand))
-                .filter(products -> products.size() >= 10)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Product> getProductsThatUserMayLike(final Product product) {
-        return productDao.getProductsByColumn("productName", product.getProductName())
-                .stream()
-                .filter(element -> !element.equals(product))
-                .limit(4)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Product> getProductsBySex(final List<Product> products, final String sex) {
-
-        return products
-                .stream()
-                .filter(product -> product.getSex().equals(getUkrainianSex(sex)))
-                .collect(Collectors.toList());
-
-    }
-
-    @Override
     public void addProduct(final Product product) {
         productDao.add(product);
     }
@@ -126,6 +51,40 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(final Product product) {
         productDao.delete(product);
+    }
+
+    @Override
+    public List<Product> getUniqueProductNames(final String typeName, final String sex) {
+
+        return productDao.getProducts(typeName, null, getUkrainianSex(sex))
+                .stream()
+                .filter(distinctByKey(Product::getProductName))
+                .collect(Collectors.toList());
+
+    }
+
+    private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        final Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return product -> seen.add(keyExtractor.apply(product));
+    }
+
+    @Override
+    public List<Product> getUniqueNamesOfPopularBrands(final String sex) {
+
+        return productDao.getProducts("Популярні бренди", null, getUkrainianSex(sex))
+                .stream()
+                .filter(distinctByKey(Product::getBrand))
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<Product> getProductsThatUserMayLike(final Product product, final String sex) {
+        return productDao.getProducts(product.getTypeName(), product.getProductName(), getUkrainianSex(sex))
+                .stream()
+                .filter(element -> !element.equals(product))
+                .limit(4)
+                .collect(Collectors.toList());
     }
 
     @Override

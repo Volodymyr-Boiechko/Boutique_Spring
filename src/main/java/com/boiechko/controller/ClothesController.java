@@ -46,6 +46,7 @@ public class ClothesController {
     public String onClothes(@PathVariable("sex") final String sex,
                             @PathVariable("typeName") final String typeName,
                             @RequestParam(name = "productName", required = false) final String productName,
+                            @RequestParam(name = "newest", defaultValue = "false") final boolean newest,
                             final Model model) {
 
         final ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -60,6 +61,7 @@ public class ClothesController {
             session.setAttribute("filterObjects", null);
         }
 
+        session.setAttribute("newest", newest);
         session.setAttribute("clothes", clothesService.getListOfClothes(typeName, productName, sex));
         session.setAttribute("typeName", typeName);
         session.setAttribute("productName", productName);

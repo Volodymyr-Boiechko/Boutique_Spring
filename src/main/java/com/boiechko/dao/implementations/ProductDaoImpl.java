@@ -8,11 +8,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 @Transactional
 public class ProductDaoImpl implements ProductDao {
+
+    private final int NUMBER_OF_PRODUCTS_TO_MAKE_BRAND_POPULAR = 7;
 
     private final SessionFactory sessionFactory;
 
@@ -34,12 +35,15 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Product> getLatestAddedProducts() {
+    public List<Product> getProducts(final String typeName, final String productName, final String sex) {
 
-        Query<Product> query = sessionFactory.getCurrentSession()
-                .createQuery("FROM Product ORDER BY idProduct DESC");
+        final String queryString = createStringQueryForSelectingProducts(typeName, productName);
 
-        return query.list().stream().limit(30).collect(Collectors.toList());
+        final Query<Product> query = sessionFactory.getCurrentSession()
+                .createQuery(queryString)
+                .setParameter(1, sex);
+
+        return query.list();
 
     }
 
@@ -49,36 +53,35 @@ public class ProductDaoImpl implements ProductDao {
                                                 final String[] selectedBrands, final String[] selectedColors,
                                                 final String[] selectedSizes, final int minPrice, final int maxPrice) {
 
-        String queryString = "FROM Product product WHERE typeName=?1 AND sex=?2 AND price >=?3 AND price <=?4";
+        String queryString = createStringQueryForSelectingProducts(typeName, productName);
 
-        if (productName != null) {
-            queryString += " AND product.productName = '" + productName + "'";
-        }
+        queryString += " AND product.price >=?2 AND product.price <=?3";
 
         if (selectedBrands != null) {
-            queryString += " AND brand IN (:brands)";
+            queryString += " AND product.brand IN (:brands)";
         }
 
         if (selectedColors != null) {
-            queryString += " AND color IN (:colors)";
+            queryString += " AND product.color IN (:colors)";
         }
 
         if (selectedSizes != null) {
             queryString += " AND product.size IN (:sizes)";
         }
 
-        switch (sortBy) {
-            case "Новинки": queryString += " ORDER BY product.idProduct ASC"; break;
-            case "Сортувати за зростанням": queryString += " ORDER BY product.price ASC"; break;
-            case "Сортувати за спаданням": queryString += " ORDER BY product.price DESC"; break;
+        if (sortBy.contains("Новинки")) {
+            queryString += " ORDER BY product.idProduct DESC";
+        } else if (sortBy.equals("Сортувати за зростанням")) {
+            queryString += " ORDER BY product.price ASC";
+        } else if (sortBy.equals("Сортувати за спаданням")) {
+            queryString += " ORDER BY product.price DESC";
         }
 
         final Query<Product> query = sessionFactory.getCurrentSession()
                 .createQuery(queryString)
-                .setParameter(1, typeName)
-                .setParameter(2, sex)
-                .setParameter(3, minPrice)
-                .setParameter(4, maxPrice);
+                .setParameter(1, sex)
+                .setParameter(2, minPrice)
+                .setParameter(3, maxPrice);
 
         if (selectedBrands != null) {
             query.setParameterList("brands", selectedBrands);
@@ -94,17 +97,31 @@ public class ProductDaoImpl implements ProductDao {
 
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Product> groupByColumn(final String column) {
+    public String createStringQueryForSelectingProducts(final String typeName, final String productName) {
 
-        Query<Product> query = sessionFactory.getCurrentSession()
-                .createQuery("FROM Product GROUP BY " + column);
+        String queryString;
+        final boolean isClothes = typeName.equals("Одяг") || typeName.equals("Взуття") || typeName.equals("Аксесуари") || typeName.equals("Спортивний одяг");
 
-        return query.list();
+        if (typeName.equals("Новинки")) {
+            queryString = "FROM Product product WHERE product.sex=?1";
+        } else if (typeName.equals("Популярні бренди")) {
+
+            queryString = "FROM Product product " +
+                    "WHERE product.brand IN " +
+                    "(SELECT brand FROM Product GROUP BY brand HAVING COUNT(brand) >= " + NUMBER_OF_PRODUCTS_TO_MAKE_BRAND_POPULAR + ") " +
+                    "AND product.sex=?1";
+
+        } else if (isClothes && productName == null) {
+
+            queryString = "FROM Product product WHERE product.sex=?1 AND product.typeName = '" + typeName +"'";
+
+        } else {
+            queryString = "FROM Product product WHERE product.sex=?1 AND product.productName = '" + productName + "'";
+        }
+
+        return queryString;
 
     }
-
 
     @Override
     @SuppressWarnings("unchecked")

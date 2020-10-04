@@ -28,8 +28,7 @@ public class ProductController {
         final Product product = productService.getProductById(idProduct);
 
         model.addAttribute("product", product);
-        model.addAttribute("productsThatUserMayLike",
-                productService.getProductsBySex(productService.getProductsThatUserMayLike(product), sex));
+        model.addAttribute("productsThatUserMayLike", productService.getProductsThatUserMayLike(product, sex));
         model.addAttribute("pathToProduct", Arrays.asList(productService.getUkrainianSex(sex),
                 productService.getEnglishTypeName(product.getTypeName())));
 

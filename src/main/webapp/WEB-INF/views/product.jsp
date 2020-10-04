@@ -132,58 +132,62 @@
 
 </div>
 
-<div class="mayLike">
+<c:if test="${productsThatUserMayLike.size() != 0}">
 
-    <div class="container">
+    <div class="mayLike">
 
-        <h1 class="mayLike__title">Можливо вам також сподобається</h1>
+        <div class="container">
 
-        <div class="row">
+            <h1 class="mayLike__title">Можливо вам також сподобається</h1>
 
-            <div class="offset-md-2"></div>
+            <div class="row">
 
-            <c:forEach items="${productsThatUserMayLike}" var="product">
+                <div class="offset-md-2"></div>
 
-                <div class="block col-md-2">
+                <c:forEach items="${productsThatUserMayLike}" var="product">
 
-                    <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/productItem/${product.idProduct}">
+                    <div class="block col-md-2">
 
-                        <div class="clothes__block clothes__block_mini">
+                        <a href="${pageContext.request.contextPath}/clothes/${sessionScope.sex}/productItem/${product.idProduct}">
 
-                            <div class="clothes__block__img clothes__block__img_mini">
+                            <div class="clothes__block clothes__block_mini">
 
-                                <img class="clothes__block__img_main"
-                                     src="${pageContext.request.contextPath}/resources/${product.image}"
-                                     alt="${product.productName}">
+                                <div class="clothes__block__img clothes__block__img_mini">
 
-                                <div class="hover"></div>
+                                    <img class="clothes__block__img_main"
+                                         src="${pageContext.request.contextPath}/resources/${product.image}"
+                                         alt="${product.productName}">
 
-                            </div>
+                                    <div class="hover"></div>
 
-                            <div class="clothes__block__text">
-
-                                <div class="clothes__block__text_title clothes__block__text_title_mini">
-                                        ${product.description}
                                 </div>
 
-                                <div class="clothes__block__text_price clothes__block__text_price_mini">
-                                        ${product.price} грн.
+                                <div class="clothes__block__text">
+
+                                    <div class="clothes__block__text_title clothes__block__text_title_mini">
+                                            ${product.description}
+                                    </div>
+
+                                    <div class="clothes__block__text_price clothes__block__text_price_mini">
+                                            ${product.price} грн.
+                                    </div>
+
                                 </div>
 
                             </div>
+                        </a>
 
-                        </div>
-                    </a>
+                    </div>
 
-                </div>
+                </c:forEach>
 
-            </c:forEach>
+            </div>
 
         </div>
 
     </div>
 
-</div>
+</c:if>
 
 <jsp:include page="components/footer.jsp"/>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
